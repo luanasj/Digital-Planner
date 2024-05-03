@@ -1,0 +1,99 @@
+
+[
+    {
+    "id": 1,
+    "description": "Entrar na UFBA",
+    "category": 1,
+    "accomplished": false,
+    "date":"2024-04-23",
+    "dayweek":2 
+},
+    {
+    "id": 2,
+    "description": "Acompanhamento com Nutricionista",
+    "category": 1,
+    "accomplished": true,
+    "date":"2024-05-01",
+    "dayweek":2 
+},
+    {
+    "id": 3,
+    "description": "Aprender Inglês",
+    "category": 1,
+    "accomplished": false,
+    "date":"2024-01-01",
+    "dayweek":1
+},
+    {
+    "id": 4,
+    "description": "Tirar a Habilitação",
+    "category": 1,
+    "accomplished": false,
+    "date":"2024-01-01",
+    "dayweek":1
+},
+    {
+    "id": 5,
+    "description": "Lavar o Banheiro",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-04-23",
+    "dayweek":2 
+},
+    {
+    "id": 6,
+    "description": "Colocar o Frango pra Descongelar",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-04-23",
+    "dayweek":2 
+},
+    {
+    "id": 7,
+    "description": "Levar o Cachorro para passear",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-04-23",
+    "dayweek":2 
+},
+    {
+    "id": 8,
+    "description": "Ir para a Academia",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-05-01",
+    "dayweek":2 
+},
+    {
+    "id": 9,
+    "description": "Fazer slide de História",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-05-01",
+    "dayweek":3 
+},
+    {
+    "id": 10,
+    "description": "Lavar o Cabelo",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-05-01",
+    "dayweek":3 
+},
+    {
+    "id": 11,
+    "description": "Trocar Roupa de cama",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-05-01",
+    "dayweek":3 
+},
+    {
+    "id": 12,
+    "description": "Estudar para prova de Matemática",
+    "category": 2,
+    "accomplished": false,
+    "date":"2024-05-01",
+    "dayweek":4
+}
+]

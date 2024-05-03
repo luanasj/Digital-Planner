@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Contacts</title>
+</head>
+<body id="contactsBody" class="contactsBody">
+    <main id="contactsMain" class="contactsMain">
+        <section id="contactsHeader" class="contactsHeader">
+            <div id="searchComponents" class="searchComponents">
+                <input type="search" name="searchText" id="searchText" class="searchText" placeholder="Pesquisar">
+                <button id="search_btn" class="toolButton"><i class="ph ph-magnifying-glass"></i></button>
+                <select name="searchCategories" id="searchCategories" class="searchCategories">
+                    <option value="nome" selected>Nome</option>
+                    <option value="disciplina">Disciplina</option>
+                    <option value="vinculo">Vínculo</option>
+                    <option value="instituicao">Instituição</option>
+                </select>
+            </div>
+            <div id="contactsTools" class="contactsTools">
+                <button  id="newContact_btn" class="toolButton"><i class="ph ph-plus"></i></button>
+                <button  id="del_btn" class="toolButton"><i class="ph ph-trash"></i></button>
+                <button  id="selectAll_btn" class="toolButton"><input type="checkbox" name="selectAll" id="selectAll"></button>
+            </div>
+        </section>
+        <section id="contactsCards" class="contactsCards">
+            <div id="contact1" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+                    
+            </div>
+            <div id="contact2" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>            
+            </div>
+            <div id="contact3" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div> 
+            </div>
+            <div id="contact4" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+            </div>
+            <div id="contact5" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+            </div>
+            <div id="contact6" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+            </div>
+            <div id="contact7" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+            </div>
+            <div id="contact8" class="contactCard">
+                <div id="contactContent1" class="contactInfo">
+                    <span class="contactName infoText">Nome:<span>Bruno Almeida</span></span>
+                    <span class="contactBond infoText">Vínculo:<span>Professor</span></span>
+                    <span class="contactSubject infoText">Matéria:<span>MATA01 - Calculo A</span></span>
+                    <span class="contactEmail infoText">Email:<span>bruno123@outlook.com.br</span></span>
+                    <span class="contactTel infoText">Telefone:<span>999999999</span></span>
+                    <span class="contactLink infoText">Link:<span><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+                    <span class="contactInstitution infoText">Instituição:<span>UFBA - Universidade Federal da Bahia</span></span>
+                </div>
+                <div class="cardTools">
+                    <button class="toolButton"><i class="ph ph-pencil"></i></button>
+                    <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+                </div>
+            </div> 
+        </section>
+        <div id="editContact" class="editContact">
+            <form id="editContent" class="editContent">
+                <div class="editInfo">
+                    <label for="nameEdit">Nome:</label>
+                    <input type="text" name="nameEdit" id="nameEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="bondEdit">Vínculo:</label>
+                    <input type="text" name="bondEdit" id="bondEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="subjectEdit">Matéria:</label>
+                    <input type="text" name="subjectEdit" id="subjectEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="emailEdit">Email:</label>
+                    <input type="text" name="emailEdit" id="emailEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="telEdit">Telefone:</label>
+                    <input type="tel" name="telEdit" id="telEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="linkEdit">Link:</label>
+                    <input type="url" name="linkEdit" id="linkEdit" class="editInput">
+                </div>
+                <div class="editInfo">
+                    <label for="institutionEdit">Instituto:</label>
+                    <input type="text" name="institutionEdit" id="institutionEdit" class="editInput">
+                </div>
+                <div class="editButton">
+                    <button id="editOkBtn" class="tabBtn">OK</button>
+                    <button id="editCancelBtn" class="tabBtn">Cancel</button>
+                </div>
+            </form>
+            
+        </div>
+</main>
+
+</body>
+</html>
