@@ -12,29 +12,18 @@
     <main id="scheduleMain" class="scheduleMain">
         <div id="week_schedule" class="week_schedule">
             <table id="scheduleTable" class="scheduleTable">
-                <caption class="scheduleTitle"><h4>Horários do Dia</h4></caption>
-                <colgroup>
-                        <col class="period" span="1" />
-                        <col  id="mondayActivities" class="activity" span="1"/>
-                        <col  id="tuesdayActivities" class="activity"  span="1"/>
-                        <col  id="wednesdayActivities" class="activity" span="1"/>
-                        <col  id="thursdayActivities" class="activity" span="1"/>
-                        <col  id="fridayActivities" class="activity" span="1"/>
-                        <col  id="saturdayActivities" class="activity" span="1"/>
-                        <col  id="sundayActivities" class="activity" span="1"/>
-                </colgroup>
-                <thead>
+                 <thead id="weekScheduleThead">
                     <tr class="scheduleRow">
-                        <th class="scheduleHead">Horário</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
-                        <th class="scheduleHead">Atividade</th>
+                        <td class="schedulePeriod"></td>
+                        <td class="scheduleActivity"><input type="text" value="Domingo"></td>
+                        <td class="scheduleActivity"><input type="text" value="Segunda-Feira"></td>
+                        <td class="scheduleActivity"><input type="text" value="Terça-Feira"></td>
+                        <td class="scheduleActivity"><input type="text" value="Quarta-Feira"></td>
+                        <td class="scheduleActivity"><input type="text" value="Quinta-Feira"></td>
+                        <td class="scheduleActivity"><input type="text" value="Sexta-Feira"></td>
+                        <td class="scheduleActivity"><input type="text" value="Sábado"></td>
                     </tr>
-                </thead>
+                </thead> 
                 <tbody>
                     <tr class="scheduleRow">
                         <td class="schedulePeriod">07:00<br>08:50</td>

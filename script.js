@@ -1,4 +1,9 @@
 const tabBtns = document.querySelectorAll(".tabBtn")
+const daysOfTheWeek_Pt = ['Domingo','Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado']
+const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thurdsay','friday','saturday']
+const currentDate = new Date()
+const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
+
 
 tabBtns.forEach((el)=>{
     el.addEventListener("click",(evt)=>{
@@ -72,7 +77,11 @@ const quoteData = ()=>{
     })
 }
 
-// quoteData()
+// quoteData() IMPORTANT DO UNDO THE COMMENT DO CALL THE FUNCTION
+
+
+
+
 
 // const date = new Date("2024-04-24")
 
@@ -90,6 +99,8 @@ fetch("tasks_goals_data.json")
     //         }
     //     )    
     //             goalsFill(insertGoal)
+    
+    document.querySelector('#dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
     const insertGoal = (cat,date)=>{
                 
             if(!date){
@@ -109,7 +120,7 @@ fetch("tasks_goals_data.json")
             }
 
             goal_task_Fill(insertGoal(1),'goal',10)
-            goal_task_Fill(insertGoal(2,new Date().toISOString().slice(0,10)),'task',15)
+            goal_task_Fill(insertGoal(2, currentDate.toISOString().slice(0,10)),'task',15,currentDate.getDay())
 
 
 
@@ -192,16 +203,15 @@ const goalsFill = (goalsDataObj)=>{
 //   <label for="goal1"><input type="text" value="Meta 1" readonly></label>    
 //   </li>
 
-console.log(new Date().toISOString().slice(0,10))
 
-const goal_task_Fill = (catDataObj,catName,cellsQtd)=>{
+const goal_task_Fill = (catDataObj,catName,cellsQtd,dayWeek)=>{
     const catsContainer = document.querySelector(`#${catName}sContainer`)
     catsContainer.innerHTML = ''
     const catsAmount = document.querySelectorAll(`.${catName} > input[type='checkbox']`)
     
 
     const newcat = document.createElement('li')
-    newcat.classList.add(`${catName}`,`new${catName}`)
+    newcat.classList.add(`${catName}`,`new${catName}`,`${daysOfTheWeek_En[dayWeek]}`)
     if(catsAmount.length < cellsQtd){
         catsContainer.appendChild(newcat)
         const newcatInput = document.createElement('input')
@@ -213,7 +223,7 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd)=>{
 
     for (var i = 0; i < (cellsQtd - 1); i++) {
         const catLi = document.createElement('li')
-        catLi.classList.add(`${catName}`)
+        catLi.classList.add(`${catName}`,`${daysOfTheWeek_En[dayWeek]}`)
         if (catDataObj[i] != undefined){
             const catCheckbox = document.createElement('input')
             catCheckbox.setAttribute('type','checkbox')
@@ -242,6 +252,44 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd)=>{
 
 
 
+console.log(dailySchedule)
+// console.log(dailySchedule[0].children[1])
+
+fetch("schedule.json")
+.then(res=>res.json())
+.then(dados=>{
+    const schedulefilter = (scheduleDay)=>{
+        return dados.filter((el)=>{
+            return el.dayWeek == scheduleDay
+        })
+    }
+    
+    
+
+    const dailyScheduleFill = (obj)=>{
+        for (let i in obj){
+        console.log(dailySchedule[i].children[1].children[0])
+
+        if (obj[i].activity == null){
+            dailySchedule[i].children[1].children[0].setAttribute('value','')
+        } else {
+            dailySchedule[i].children[1].children[0].setAttribute('value',`${obj[i].activity}`)
+            dailySchedule[i].children[1].classList.add(`${daysOfTheWeek_En[currentDate.getDay()]}`)
+            dailySchedule[i].children[1].children[0].setAttribute('readonly','readonly')
+        }
+
+
+
+    }
+    }
+
+    dailyScheduleFill(schedulefilter(currentDate.getDay()))
+    
+    
+    // for (let i of schedulefilter(currentDate.getDay())){
+    //     console.log(i)
+    // }
+})
 
 
 

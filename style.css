@@ -286,14 +286,10 @@ header{
     font-size: 1rem !important;
 }
 
-.task:nth-child(odd){
-    background-color: #D8B4F8d8;
+.task{
     height: 6.667%;
 }
-.task:nth-child(even){
-    background-color: #D8B4F892;
-    height: 6.667%;
-}
+
 
 .task input[type="checkbox"],.goal input[type="checkbox"] {
     display:none
@@ -401,12 +397,6 @@ header{
 }
 .scheduleTitle h4{
     width: 85%;
-}
-
-
-.scheduleHead{
-    font-size: 0.8rem;
-    display: none;
 }
 
 .scheduleTable tbody{
@@ -779,6 +769,11 @@ header{
     height: 100%;
     /* border: 1px solid #d60b0b; */
 }
+
+
+
+
+
 
 
 
