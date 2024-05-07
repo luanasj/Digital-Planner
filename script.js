@@ -1,6 +1,6 @@
 const tabBtns = document.querySelectorAll(".tabBtn")
 const daysOfTheWeek_Pt = ['Domingo','Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado']
-const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thurdsay','friday','saturday']
+const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
 const currentDate = new Date()
 const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
 
@@ -92,7 +92,7 @@ const quoteData = ()=>{
 fetch("tasks_goals_data.json")
 .then(res=>res.json())
 .then(data=>{
-    console.log(data)
+    // console.log(data)
     // const insertGoal = data.filter(
     //         (el)=>{
     //            return el.category==1
@@ -100,7 +100,7 @@ fetch("tasks_goals_data.json")
     //     )    
     //             goalsFill(insertGoal)
     
-    document.querySelector('#dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
+    // document.querySelector('#dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
     const insertGoal = (cat,date)=>{
                 
             if(!date){
@@ -119,8 +119,25 @@ fetch("tasks_goals_data.json")
         
             }
 
-            goal_task_Fill(insertGoal(1),'goal',10)
-            goal_task_Fill(insertGoal(2, currentDate.toISOString().slice(0,10)),'task',15,currentDate.getDay())
+            // goal_task_Fill(insertGoal(1),'goal',10,document.querySelector(`#goalsContainer`))
+            //tirar o comentário e condicionar essa função à home
+            // goal_task_Fill(insertGoal(2, currentDate.toISOString().slice(0,10)),'task',15,document.querySelector(`#tasksContainer`),currentDate.getDay())
+            weekTasksFill = ()=>{
+                const weekToDoContainers = document.querySelectorAll('.tasksContainer')
+                let firstMondayWeek = (Date.now() - currentDate.getDay() * 86400000) + 86400000
+                // console.log(new Date(firstMondayWeek).toISOString().slice(0,10))
+            
+                weekToDoContainers.forEach(container=>{
+            
+                    goal_task_Fill(insertGoal(2,new Date(firstMondayWeek).toISOString().slice(0,10)),'task',15,container,new Date(firstMondayWeek).getDay())
+            
+            
+                    firstMondayWeek = firstMondayWeek + 86400000 
+                })
+            
+            } 
+            
+            weekTasksFill()
 
 
 
@@ -204,10 +221,11 @@ const goalsFill = (goalsDataObj)=>{
 //   </li>
 
 
-const goal_task_Fill = (catDataObj,catName,cellsQtd,dayWeek)=>{
-    const catsContainer = document.querySelector(`#${catName}sContainer`)
+const goal_task_Fill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
     catsContainer.innerHTML = ''
-    const catsAmount = document.querySelectorAll(`.${catName} > input[type='checkbox']`)
+    const catsAmount = [...catsContainer.children].filter(el=>{
+        return el.children[0] && el.children[0].classList.contains('taskCheckbox')
+    })
     
 
     const newcat = document.createElement('li')
@@ -252,7 +270,7 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd,dayWeek)=>{
 
 
 
-console.log(dailySchedule)
+// console.log(dailySchedule)
 // console.log(dailySchedule[0].children[1])
 
 fetch("schedule.json")
@@ -268,7 +286,7 @@ fetch("schedule.json")
 
     const dailyScheduleFill = (obj)=>{
         for (let i in obj){
-        console.log(dailySchedule[i].children[1].children[0])
+        // console.log(dailySchedule[i].children[1].children[0])
 
         if (obj[i].activity == null){
             dailySchedule[i].children[1].children[0].setAttribute('value','')
@@ -290,6 +308,21 @@ fetch("schedule.json")
     //     console.log(i)
     // }
 })
+
+// 1 dia = 86400000 milisegundos 
+
+
+
+// console.log(weekToDoContainers)
+
+
+ 
+
+
+
+
+
+
 
 
 
