@@ -2,7 +2,6 @@ const tabBtns = document.querySelectorAll(".tabBtn")
 const daysOfTheWeek_Pt = ['Domingo','Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado']
 const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
 const currentDate = new Date()
-const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
 
 
 tabBtns.forEach((el)=>{
@@ -13,18 +12,7 @@ tabBtns.forEach((el)=>{
     })
 })
 
-// const obterDados = ()=>{
-//     const endpoint = "https://api.weatherapi.com/v1/current.json?key=bd63768a168744b0b9914245241904&q=Salvador"
-//     fetch(endpoint,{method:"get"})
-//     .then(res=>res.json()) //1º then vai transformar o retorno em json
-//                         //método ".text()" transforma em texto
-//     .then(dados=>{ //2º then faz o tratamento dos dados retornados pelo 1º then
-//     console.log(dados)
-    
-// })
-// }
 
-// obterDados()
 
 const weatherData = (lat,long)=> {
     const weatherLoc = document.querySelector('#weatherLocation')
@@ -34,13 +22,15 @@ const weatherData = (lat,long)=> {
     fetch(`https://api.weatherapi.com/v1/current.json?key=bd63768a168744b0b9914245241904&q=${lat},${long}`)
     .then(res=>res.json())
     .then((dados)=>{
-        weatherLoc.innerText = `${dados.location.name},${dados.location.region.slice(0,2)}`
+        if (weatherLoc && weatherTemp && weatherDesc && weatherIcon){
+            weatherLoc.innerText = `${dados.location.name},${dados.location.region.slice(0,2)}`
         weatherTemp.innerText = `${dados.current.temp_c}º`
         weatherDesc.innerText = `${dados.current.condition.text}`
         const weatherIconImg = document.createElement('img')
         weatherIconImg.setAttribute('src', dados.current.condition.icon)
         weatherIcon.appendChild(weatherIconImg)
-        // weatherIcon.setAttribute('src', dados.current.condition.icon)
+        }
+        
 
         
     })
@@ -59,7 +49,8 @@ const err = ()=>{
 }
 
 
-navigator.geolocation.getCurrentPosition(success, err)
+const weatherFill = ()=>navigator.geolocation.getCurrentPosition(success, err)
+weatherFill()
 
 const quoteData = ()=>{
     const endpoint = "https://api.api-ninjas.com/v1/quotes?category=inspirational"
@@ -72,35 +63,20 @@ const quoteData = ()=>{
     .then(res=>res.json())
     .then(dados=>{
         const quote = document.querySelector('#quote')
-        quote.innerText = `${dados[0].quote} - ${dados[0].author}`
+        if (quote){
+            quote.innerText = `${dados[0].quote} - ${dados[0].author}`
+        }
 
     })
 }
 
-// quoteData() IMPORTANT DO UNDO THE COMMENT DO CALL THE FUNCTION
+quoteData() 
 
 
-
-
-
-// const date = new Date("2024-04-24")
-
-// console.log(date.toISOString())
-// console.log(date)
-// console.log(date.getDay())
-
-fetch("tasks_goals_data.json")
+const goalsAndTasksFill = ()=> {fetch("tasks_goals_data.json")
 .then(res=>res.json())
 .then(data=>{
-    // console.log(data)
-    // const insertGoal = data.filter(
-    //         (el)=>{
-    //            return el.category==1
-    //         }
-    //     )    
-    //             goalsFill(insertGoal)
-    
-    // document.querySelector('#dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
+
     const insertGoal = (cat,date)=>{
                 
             if(!date){
@@ -119,13 +95,19 @@ fetch("tasks_goals_data.json")
         
             }
 
-            // goal_task_Fill(insertGoal(1),'goal',10,document.querySelector(`#goalsContainer`))
-            //tirar o comentário e condicionar essa função à home
-            // goal_task_Fill(insertGoal(2, currentDate.toISOString().slice(0,10)),'task',15,document.querySelector(`#tasksContainer`),currentDate.getDay())
-            weekTasksFill = ()=>{
+            
+            const dailyTasksFill = ()=> {document.querySelector('#daily_toDo #dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
+                    goal_task_Fill(insertGoal(1),'goal',10,document.querySelector(`#goalsContainer`))
+                    goal_task_Fill(insertGoal(2, currentDate.toISOString().slice(0,10)),'task',15,document.querySelector(`#daily_toDo #tasksContainer`),currentDate.getDay())
+                }
+                
+            if(document.querySelector('#daily_toDo')){
+                dailyTasksFill()
+            }
+            
+            const weekTasksFill = ()=>{
                 const weekToDoContainers = document.querySelectorAll('.tasksContainer')
                 let firstMondayWeek = (Date.now() - currentDate.getDay() * 86400000) + 86400000
-                // console.log(new Date(firstMondayWeek).toISOString().slice(0,10))
             
                 weekToDoContainers.forEach(container=>{
             
@@ -135,37 +117,15 @@ fetch("tasks_goals_data.json")
                     firstMondayWeek = firstMondayWeek + 86400000 
                 })
             
-            } 
-            
-            weekTasksFill()
+            }
 
-
-
-            
-            // console.log(insertGoal(1,new Date().toISOString().slice(0,10)))
-    
+            if(document.querySelector('.weeklyToDoTop')){
+                weekTasksFill() 
+            }   
 
 })
-
-// const insertGoal = data.filter(
-//     (el)=>{
-//        return el.category==1
-//     }
-// )    
-
-// .then(data=>{
-//     console.log(data)
-//     const insertGoal = (cat,date)=>{
-//         return data.filter(
-//             (el)=>{
-//                return (el.category==cat) and (el.date==date)
-//             }
-//         )
-
-//     }
-//     console.log(insertGoal(1))
-
-// })
+}
+goalsAndTasksFill()
 
 const goalsFill = (goalsDataObj)=>{
     const goalsContainer = document.querySelector(`#goalsContainer`)
@@ -212,13 +172,6 @@ const goalsFill = (goalsDataObj)=>{
     }
 
 }
-
-
-
-//   <li class="goal">
-//   <input type="checkbox" name="goal1" id="goal1" class="goalCheckbox">
-//   <label for="goal1"><input type="text" value="Meta 1" readonly></label>    
-//   </li>
 
 
 const goal_task_Fill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
@@ -269,10 +222,6 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
 }
 
 
-
-// console.log(dailySchedule)
-// console.log(dailySchedule[0].children[1])
-
 fetch("schedule.json")
 .then(res=>res.json())
 .then(dados=>{
@@ -282,38 +231,63 @@ fetch("schedule.json")
         })
     }
     
-    
-
-    const dailyScheduleFill = (obj)=>{
+    const scheduleFill = (schEl,obj,day,num)=>{
+        
+    // for(let count = 0; count < num;i++){
         for (let i in obj){
-        // console.log(dailySchedule[i].children[1].children[0])
 
-        if (obj[i].activity == null){
-            dailySchedule[i].children[1].children[0].setAttribute('value','')
-        } else {
-            dailySchedule[i].children[1].children[0].setAttribute('value',`${obj[i].activity}`)
-            dailySchedule[i].children[1].classList.add(`${daysOfTheWeek_En[currentDate.getDay()]}`)
-            dailySchedule[i].children[1].children[0].setAttribute('readonly','readonly')
-        }
-
-
-
+            if (obj[i].activity == null){
+                    schEl[i].children[num].children[0].setAttribute('value','')
+            } else {
+                    schEl[i].children[num].children[0].setAttribute('value',`${obj[i].activity}`)
+                    schEl[i].children[num].classList.add(`${daysOfTheWeek_En[day]}`)
+                    schEl[i].children[num].children[0].setAttribute('readonly','readonly')
+                } 
+            
+            }
     }
-    }
+        
 
-    dailyScheduleFill(schedulefilter(currentDate.getDay()))
-    
-    
-    // for (let i of schedulefilter(currentDate.getDay())){
-    //     console.log(i)
     // }
+    
+
+    if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
+        const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
+        scheduleFill(dailySchedule,schedulefilter(currentDate.getDay()),currentDate.getDay(),1)
+        
+    }
+
+    if(document.querySelectorAll('.week_schedule tbody').length > 0) {
+        const weekSchedule = document.querySelectorAll('.week_schedule tbody .scheduleRow')
+        const scheduleDays = [1,2,3,4,5,6,0]
+       
+        scheduleDays.forEach((day)=>{
+            scheduleFill(weekSchedule,schedulefilter(day),day,(scheduleDays.indexOf(day)+1))
+        })
+       console.log(schedulefilter(0))
+       
+       
+       
+       
+       
+        
+
+    }
+        
+    
+
+    
+        
+    
+
+    
 })
 
-// 1 dia = 86400000 milisegundos 
 
 
 
-// console.log(weekToDoContainers)
+
+
 
 
  
