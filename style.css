@@ -37,7 +37,9 @@ header{
 }
 
 .headerIcon{
-    width: 25px;
+    /* border: 1px solid #d60b0b; */
+    font-size: 30px;
+    width: 30px;
 }
 .headerIcon:hover{
     /* box-shadow: 0px 5px 5px 0px ); */
@@ -74,9 +76,10 @@ header{
     justify-content: flex-start;
     column-gap: 5px;
     flex-wrap: wrap;
-    /* border: 1px solid #d60b0b; */
+    border: 1px solid #d60b0b;
     
 }
+
 
 
 
@@ -94,15 +97,6 @@ header{
     color: #fff !important;
 }
 
-
-.tabsMenu_icons{
-    /* border: 1px solid #d60b0b; */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 60px;
-}
-
 .tabBtn.tabselected{
     background-color: rgb(255, 182, 229); 
 }
@@ -110,6 +104,8 @@ header{
 .menu_btn{
     border-radius: 50%;
     cursor: pointer;
+    /* border: 1px solid #d60b0b; */
+    font-size: 25px;
 }
 
 .menu_btn:hover{
@@ -178,8 +174,10 @@ header{
     height:10%;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    text-align: center;
+    /* padding: 5px; */
     border: 1px dashed #000;
     color: #000;
     
@@ -595,14 +593,14 @@ header{
     
 }
 
-.infoText{
+.infoLabel{
     min-width: 40%;
     font-weight: 560;
     font-size: 0.95rem;
 }
 
-.infoText span{
-    font-weight: 200;
+.infoText{
+    font-weight: 200 !important; 
 }
 
 .editContact{

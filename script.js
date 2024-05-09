@@ -179,6 +179,10 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
     const catsAmount = [...catsContainer.children].filter(el=>{
         return el.children[0] && el.children[0].classList.contains('taskCheckbox')
     })
+    // or
+    // const catsAmount2 = catsContainer.querySelectorAll('.taskCheckbox') 
+
+    
     
 
     const newcat = document.createElement('li')
@@ -218,6 +222,7 @@ const goal_task_Fill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
 
    
     }
+
 
 }
 
@@ -282,6 +287,99 @@ fetch("schedule.json")
 
     
 })
+
+const contactsFill = (data)=>{
+
+    
+    
+
+
+    data.forEach((obj)=>{
+    const contactsCardsSection = document.querySelector('#contactsCards')
+
+    const contact = document.createElement('div')
+    contact.setAttribute('id', `contact${obj.id}`)
+    contact.classList.add('contactCard')
+    contactsCardsSection.appendChild(contact)
+
+    const contactContent = document.createElement('div')
+    contactContent.setAttribute('id',`contactContent${obj.id}`)
+    contactContent.classList.add('contactInfo')
+    contact.appendChild(contactContent)
+
+    const cardTools = document.createElement('div')
+    cardTools.classList.add('cardTools')
+    contact.appendChild(cardTools)
+
+    const toolButton = document.createElement('button')
+    toolButton.classList.add('toolButton')
+    cardTools.appendChild(toolButton)
+
+    const toolIcon = document.createElement('i')
+    toolIcon.classList.add('ph','ph-pencil')
+    toolButton.appendChild(toolIcon)
+
+    const toolCheckbox = document.createElement('input')
+    toolCheckbox.setAttribute('type','checkbox')
+    toolCheckbox.setAttribute('name',`contactCheckbox${obj.id}`)
+    toolCheckbox.setAttribute('id',`contactCheckbox${obj.id}`)
+    toolCheckbox.classList.add("contactCheckbox")
+    cardTools.appendChild(toolCheckbox)
+
+        for (prop in obj) {
+            // console.log(prop)`
+            if(prop != 'id'){
+                const infoLabel = document.createElement('span')
+                infoLabel.classList.add(`contact${prop}`,'infoLabel')
+                infoLabel.innerText = `${prop}: `
+
+                const infoText = document.createElement('span')
+                infoText.classList.add('infoText')
+                
+                if(prop == 'Link'){
+                    const linkA = document.createElement('a')
+                    linkA.setAttribute('href',obj[prop])
+                    linkA.innerText = obj[prop]
+                    infoText.appendChild(linkA)
+                } else{
+                    infoText.innerText = obj[prop]
+                }
+                
+                infoLabel.appendChild(infoText)
+                contactContent.appendChild(infoLabel)
+
+
+            }
+            
+
+        }
+
+    })
+
+//     <div id="contact1" class="contactCard">
+//     <div id="contactContent1" class="contactInfo">
+//         <span class="contactName infoLabel">Nome:<span class="infoText">Bruno Almeida</span></span>
+//         <span class="contactBond infoLabel">Vínculo:<span class="infoText">Professor</span></span>
+//         <span class="contactSubject infoLabel">Disciplina:<span class="infoText">MATA01 - Calculo A</span></span>
+//         <span class="contactEmail infoLabel">Email:<span class="infoText">bruno123@outlook.com.br</span></span>
+//         <span class="contactTel infoLabel">Telefone:<span class="infoText">999999999</span></span>
+//         <span class="contactLink infoLabel">Link:<span class="infoText"><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
+//         <span class="contactInstitution infoLabel">Instituição:<span class="infoText">UFBA - Universidade Federal da Bahia</span></span>
+//     </div>
+//     <div class="cardTools">
+//         <button class="toolButton"><i class="ph ph-pencil"></i></button>
+//         <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
+//     </div>    
+// </div>
+}
+
+
+fetch('contacts.json')
+.then(res=>res.json())
+.then(dados=>{
+ contactsFill(dados)
+})
+
 
 
 

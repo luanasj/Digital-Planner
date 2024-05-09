@@ -10,10 +10,10 @@
 </head>
 <body>
     <header>
-        <h1 id="headerTitle" class="headerTitle">Digital Planner <img src="/assets/icons/checkbook.svg"></h1>
+        <h1 id="headerTitle" class="headerTitle">Digital Planner <i class="ph ph-notebook"></i></h1>
         <div id="headerIcons" class="headerIcons">
-            <img src="/assets/icons/github.svg" alt="github" id="githubIcon" class="headerIcon">
-            <img src="/assets/icons/linkedin.svg" alt="linkedin.svg" id="linkedinIcon" class="headerIcon">
+            <i class="ph ph-github-logo headerIcon" id="githubIcon"></i>
+            <i class="ph ph-linkedin-logo headerIcon" id="linkedinIcon"></i>
         </div>
 
     </header>
@@ -22,17 +22,15 @@
         <div id="appointmentBookContent" class="appointmentBookContent">
             <!-- BOTOES DE ABA -->
             <div id="tabsMenu" class="tabsMenu">
-                <div id="tabsMenu_btns" class="tabsMenu_btns">
+ 
                     <button id="tabBtn_Home"  class="tabBtn tabselected">HOME</button>
                     <button id="tabBtn_Contacts" class="tabBtn">CONTACTS</button>
                     <button id="tabBtn_ToDo" class="tabBtn">TO-DO</button>
                     <button id="tabBtn_Schedule" class="tabBtn">SCHEDULE</button>
-                </div>
-             <!--ICONES: ADD ABA E CONFIGURAÇÕES  -->
-                <div id="tabsMenu_icons" class="tabsMenu_icons"> 
-                    <img src="/assets/icons/add.svg" alt="new_tab" id="new_tab_btn" class="menu_btn">
-                    <img src="/assets/icons/settings.svg" alt="settings" id="settings_btn" class="menu_btn">
-                </div>
+                    <!--ICONES: TROCA DE TEMA LIGHT AND DARK  -->
+                    <i class="ph-fill ph-moon menu_btn"></i> 
+                    <!-- <i class="ph ph-sun menu_btn"></i> -->
+
             </div>
             <!-- CONTEUDO DA ABA SELECIONADA -->
             <div id="tabContent" class="tabContent">
