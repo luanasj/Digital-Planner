@@ -150,38 +150,167 @@ insert into schedule values (null,9,5);
 insert into schedule values ("Meditação e Dormir",9,6);
 
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
-values ("Bruno Almeida","Professor","MATA01 - Calculo A","bruno123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","UFBA - Universidade Federal da Bahia");
+values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 
 
+select CURDATE(); /*data atual*/
+
+select weekday(curdate()); /*dia da semana da data atual*/
+
+select SUBDATE(CURDATE(), interval weekday(curdate()) day); /*segunda da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY); /*terça-feira da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY); /*quarta-feira da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY); /*quinta-feira da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY); /*sexta-feira da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY); /*sábado da semana*/
+
+select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY); /*domingo da semana*/
+
+-- create table goalsAndTasks(
+--     i_id_goalsAndTasks int primary key auto_increment,
+--     s_description_goalsAndTasks varchar(255) not null,
+--     i_type_goalsAndTasks int not null,
+--     b_accomplished_goalsAndTasks boolean not null,
+--     d_creation_goalsAndTasks date not null,
+--     i_dayweek_goalsAndTasks int not null
+
+-- );
+
+/*insert goals*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Lorem ipsum dolor",1,false,curdate(),(weekday(curdate())));
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("sit amet",1,true,curdate(),(weekday(curdate())));
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ( "consectetur adipiscing elit",1,false,curdate(),(weekday(curdate())));
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Aliquam leo mauris",1,false,curdate(),(weekday(curdate())));
+
+/*insert task monday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("vehicula nec erat",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("volutpat, volutpat",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("consectetur leo",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Nulla facilisi",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks)
+values (" Vestibulum purus ipsum",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
+
+/*insert task tuesday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("varius sed eros quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("tempus porttitor diam",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Aliquam tempor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("sapien quis lectus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("sodales ornare",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
+
+/*insert task wednesday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Nulla sit amet",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("maximus nulla",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("sed suscipit velit",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Curabitur condimentum",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("nibh dolor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
+
+/*insert task thursday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("ac blandit eros",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("malesuada nec",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Vestibulum quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("metus facilisis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("suscipit risus ac",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
+
+/*insert task friday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("venenatis tortor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Donec dapibus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("vehicula magna",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("at tincidunt nulla",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("vulputate vel",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
+
+/*insert task saturday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Ut et arcu quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("turpis maximus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("consectetur nec et dui",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("In pharetra",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("ultrices viverra",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
+
+/*insert task sunday*/
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("Praesent feugiat",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("lorem id tempus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("ex lorem",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values (" auctor ligula",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values ("nec scelerisque",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
