@@ -7,7 +7,7 @@ create table goalsAndTasks(
     s_description_goalsAndTasks varchar(255) not null,
     i_type_goalsAndTasks int not null,
     b_accomplished_goalsAndTasks boolean not null,
-    d_creation_goalsAndTasks date not null,
+    d_date_goalsAndTasks date not null,
     i_dayweek_goalsAndTasks int not null
 
 );
@@ -184,34 +184,23 @@ values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
 values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 
+-- select CURDATE(); /*data atual*/
 
-select CURDATE(); /*data atual*/
+-- select weekday(curdate()); /*dia da semana da data atual*/
 
-select weekday(curdate()); /*dia da semana da data atual*/
+-- select SUBDATE(CURDATE(), interval weekday(curdate()) day); /*segunda da semana*/
 
-select SUBDATE(CURDATE(), interval weekday(curdate()) day); /*segunda da semana*/
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY); /*terça-feira da semana*/
 
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY); /*terça-feira da semana*/
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY); /*quarta-feira da semana*/
 
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY); /*quarta-feira da semana*/
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY); /*quinta-feira da semana*/
 
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY); /*quinta-feira da semana*/
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY); /*sexta-feira da semana*/
 
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY); /*sexta-feira da semana*/
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY); /*sábado da semana*/
 
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY); /*sábado da semana*/
-
-select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY); /*domingo da semana*/
-
--- create table goalsAndTasks(
---     i_id_goalsAndTasks int primary key auto_increment,
---     s_description_goalsAndTasks varchar(255) not null,
---     i_type_goalsAndTasks int not null,
---     b_accomplished_goalsAndTasks boolean not null,
---     d_creation_goalsAndTasks date not null,
---     i_dayweek_goalsAndTasks int not null
-
--- );
+-- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY); /*domingo da semana*/
 
 /*insert goals*/
 
@@ -314,3 +303,148 @@ insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_ac
 values (" auctor ligula",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
 insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("nec scelerisque",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
+
+/*select goals and tasks*/
+
+select * from goalsAndTasks 
+where 
+    i_type_goalsAndTasks = 1 or
+    d_date_goalsAndTasks between SUBDATE(CURDATE(), interval weekday(curdate()) day) and DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY);
+
+/*select goals ans tasks as a stored procedure*/
+
+delimiter $$
+
+create procedure goalsAnsTasksSelect(in date1 date,in date2 date)
+begin 
+
+select * from goalsAndTasks
+where i_type_goalsAndTasks = 1 or
+d_date_goalsAndTasks between date1 and date2;
+
+end $$
+
+delimiter ;
+
+/*insert goals and tasks as a procedure*/
+
+delimiter $$
+
+create procedure goalsAndTasksInsert(in descript varchar(255),in typenum int,in accomplished boolean,in dt date)
+begin 
+
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+values (descript,typenum,accomplished,dt,weekday(dt));
+
+end $$
+delimiter ;
+
+
+/*update goals and tasks*/
+
+update goalsAndTasks set s_description_goalsAndTasks = /*<nova string>*/
+where i_id_goalsAndTasks = /*id*/;
+
+update goalsAndTasks set b_accomplished_goalsAndTasks = /*true or false*/
+where i_id_goalsAndTasks = /*id*/;
+
+/*update goals and tasks as a procedure*/
+
+delimiter $$
+
+create procedure goalsAndTasksUpdate(in campo varchar(50), in entrada sql_variant, in id int)
+begin
+
+if(campo = "description")then
+    update goalsAndTasks set s_description_goalsAndTasks = entrada
+    where i_id_goalsAndTasks = id;
+else
+    update goalsAndTasks set b_accomplished_goalsAndTasks = entrada
+    where i_id_goalsAndTasks = id;
+end if;
+
+end $$
+
+delimiter;
+
+
+/*delete goalsAndTasks as a procedure*/
+
+delimiter $$
+
+create procedure goalsAndTasksDelete(in id int)
+begin
+
+delete from goalsAndTasks where i_id_goalsAndTasks = id;
+
+end $$
+delimiter ;
+
+/*select schedule*/
+
+select * from schedule;
+
+/*update schedule as a procedure*/
+
+delimiter $$
+
+create procedure scheduleUpdate(in newActivity varchar(255), in dayweek int, in scperiod int)
+begin
+
+update schedule set s_activity_schedule = newActivity
+where 
+    i_dayweek_schedule = dayweek and
+    i_period_schedule = scperiod;
+
+end $$
+delimiter ; 
+
+/*select contacts*/
+
+select * from contacts; 
+
+/*insert contacts*/
+
+delimiter $$
+
+create procedure insertContacts(in nomectt varchar(255),in vinculo varchar(255),in disciplina varchar(255),in email varchar(255),in telefone varchar(255),in sitectt varchar(255),in instituicao varchar(255))
+begin
+
+end $$
+    insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
+values (nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao);
+delimiter ;
+
+
+
+
+
+/*update contacts as a procedure*/
+
+delimiter $$
+
+create procedure contactsUpdate(in id int,in nomectt varchar(255),in vinculo varchar(255),in disciplina varchar(255),in email varchar(255),in telefone varchar(255),in sitectt varchar(255),in instituicao varchar(255))
+begin
+    update contacts set s_nome_contacts = nomectt,
+        s_vinculo_contacts = vinculo,
+        s_disciplina_contacts = disciplina,
+        s_email_contacts = email,
+        s_telefone_contacts = telefone,
+        s_site_contacts = sitectt,
+        s_instituicao_contacts = intituicao;
+    where i_id_contacts = id
+end $$
+delimiter ;
+
+/*delete contacts as a procedure*/
+
+delimiter $$
+
+create procedure contactsDelete(in id int)
+begin
+
+delete from contacts where i_id_contacts = id;
+
+end $$
+delimiter ;
+
