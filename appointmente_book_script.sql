@@ -35,7 +35,7 @@ create table schedule(
 );
 
 create table schedulePeriods (
-    i_period_schedulePeriods primary key,
+    i_period_schedulePeriods int primary key,
     s_periodDsc_schedulePeriods varchar(50) not null
 );
 
@@ -72,12 +72,12 @@ insert into schedulePeriods values (2,"08:50 to 10:40");
 insert into schedulePeriods values (3,"10:40 to 12:30");
 insert into schedulePeriods values (4,"12:30 to 13:55");
 insert into schedulePeriods values (5,"13:55 to 15:45");
-insert into schedulePeriods values (5,"15:45 to 17:35");
+insert into schedulePeriods values (6,"15:45 to 17:35");
 insert into schedulePeriods values (7,"17:35 to 19:25");
 insert into schedulePeriods values (8,"19:25 to 21:15");
 insert into schedulePeriods values (9,"21:15 to 23:05");
 
-insert into schedule values ("Matemática",1,0);;
+insert into schedule values ("Matemática",1,0);
 insert into schedule values ("Matemática",1,1);
 insert into schedule values ("Matemática",1,2);
 insert into schedule values ("Matemática",1,3);
@@ -204,112 +204,112 @@ values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br
 
 /*insert goals*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Lorem ipsum dolor",1,false,curdate(),(weekday(curdate())));
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("sit amet",1,true,curdate(),(weekday(curdate())));
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ( "consectetur adipiscing elit",1,false,curdate(),(weekday(curdate())));
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Aliquam leo mauris",1,false,curdate(),(weekday(curdate())));
 
 /*insert task monday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("vehicula nec erat",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("volutpat, volutpat",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("consectetur leo",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Nulla facilisi",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks)
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks)
 values (" Vestibulum purus ipsum",2,false,(SUBDATE(CURDATE(), interval weekday(curdate()) day)),0);
 
 /*insert task tuesday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("varius sed eros quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("tempus porttitor diam",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Aliquam tempor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("sapien quis lectus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("sodales ornare",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY)),1);
 
 /*insert task wednesday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Nulla sit amet",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("maximus nulla",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("sed suscipit velit",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Curabitur condimentum",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("nibh dolor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY)),2);
 
 /*insert task thursday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("ac blandit eros",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("malesuada nec",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Vestibulum quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("metus facilisis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("suscipit risus ac",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY)),3);
 
 /*insert task friday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("venenatis tortor",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Donec dapibus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("vehicula magna",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("at tincidunt nulla",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("vulputate vel",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY)),4);
 
 /*insert task saturday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Ut et arcu quis",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("turpis maximus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("consectetur nec et dui",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("In pharetra",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("ultrices viverra",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY)),5);
 
 /*insert task sunday*/
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("Praesent feugiat",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("lorem id tempus",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("ex lorem",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values (" auctor ligula",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("nec scelerisque",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
 
 /*select goals and tasks*/
 
-select * from goalsAndTasks 
-where 
-    i_type_goalsAndTasks = 1 or
-    d_date_goalsAndTasks between SUBDATE(CURDATE(), interval weekday(curdate()) day) and DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY);
+-- select * from goalsAndTasks 
+-- where 
+--     i_type_goalsAndTasks = 1 or
+--     d_date_goalsAndTasks between SUBDATE(CURDATE(), interval weekday(curdate()) day) and DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY);
 
 /*select goals ans tasks as a stored procedure*/
 
@@ -333,7 +333,7 @@ delimiter $$
 create procedure goalsAndTasksInsert(in descript varchar(255),in typenum int,in accomplished boolean,in dt date)
 begin 
 
-insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,b_accomplished_goalsAndTasks,d_creation_goalsAndTasks,i_dayweek_goalsAndTasks) 
+insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values (descript,typenum,accomplished,dt,weekday(dt));
 
 end $$
@@ -342,25 +342,30 @@ delimiter ;
 
 /*update goals and tasks*/
 
-update goalsAndTasks set s_description_goalsAndTasks = /*<nova string>*/
-where i_id_goalsAndTasks = /*id*/;
+-- update goalsAndTasks set s_description_goalsAndTasks = /*<nova string>*/
+-- where i_id_goalsAndTasks = /*id*/;
 
-update goalsAndTasks set b_accomplished_goalsAndTasks = /*true or false*/
-where i_id_goalsAndTasks = /*id*/;
+-- update goalsAndTasks set b_accomplished_goalsAndTasks = /*true or false*/
+-- where i_id_goalsAndTasks = /*id*/;
 
 /*update goals and tasks as a procedure*/
 
 delimiter $$
 
-create procedure goalsAndTasksUpdate(in campo varchar(50), in entrada sql_variant, in id int)
+create procedure goalsAndTasksUpdate(in campo varchar(50), in entrada varchar(250), in id int)
 begin
 
 if(campo = "description")then
     update goalsAndTasks set s_description_goalsAndTasks = entrada
     where i_id_goalsAndTasks = id;
 else
-    update goalsAndTasks set b_accomplished_goalsAndTasks = entrada
-    where i_id_goalsAndTasks = id;
+    if(entrada = "false")then
+        update goalsAndTasks set b_accomplished_goalsAndTasks = false
+        where i_id_goalsAndTasks = id;
+    else
+        update goalsAndTasks set b_accomplished_goalsAndTasks = true
+        where i_id_goalsAndTasks = id;
+    end if;
 end if;
 
 end $$
@@ -382,7 +387,7 @@ delimiter ;
 
 /*select schedule*/
 
-select * from schedule;
+-- select * from schedule;
 
 /*update schedule as a procedure*/
 
@@ -401,7 +406,7 @@ delimiter ;
 
 /*select contacts*/
 
-select * from contacts; 
+-- select * from contacts; 
 
 /*insert contacts*/
 
@@ -431,8 +436,8 @@ begin
         s_email_contacts = email,
         s_telefone_contacts = telefone,
         s_site_contacts = sitectt,
-        s_instituicao_contacts = intituicao;
-    where i_id_contacts = id
+        s_instituicao_contacts = intituicao
+    where i_id_contacts = id;
 end $$
 delimiter ;
 
