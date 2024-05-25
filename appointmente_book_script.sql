@@ -415,13 +415,12 @@ delimiter $$
 create procedure insertContacts(in nomectt varchar(255),in vinculo varchar(255),in disciplina varchar(255),in email varchar(255),in telefone varchar(255),in sitectt varchar(255),in instituicao varchar(255))
 begin
 
-end $$
-    insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
+insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
 values (nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao);
+
+end $$
+
 delimiter ;
-
-
-
 
 
 /*update contacts as a procedure*/
@@ -436,7 +435,7 @@ begin
         s_email_contacts = email,
         s_telefone_contacts = telefone,
         s_site_contacts = sitectt,
-        s_instituicao_contacts = intituicao
+        s_instituicao_contacts = instituicao
     where i_id_contacts = id;
 end $$
 delimiter ;
