@@ -5,7 +5,6 @@ const app = express()
 
 // app.use('/', rotas) //usa o modulo rotas partindo da rota raiz '/'
 
-
 app.use('/', rotas)
 
 app.get('*',(req,res)=>{
