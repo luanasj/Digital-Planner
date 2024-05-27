@@ -111,7 +111,7 @@ const goalsAndTasksFill = ()=> {fetch("tasks_goals_data.json")
             
                 weekToDoContainers.forEach(container=>{
             
-                    goal_task_Fill(insertGoal(2,new Date(firstMondayWeek).toISOString().slice(0,10)),'task',15,container,new Date(firstMondayWeek).getDay())
+                    goal_task_Fill(insertGoal(2,new Date(firstMondayWeek).toJSON().slice(0,10)),'task',15,container,new Date(firstMondayWeek).getDay())
             
             
                     firstMondayWeek = firstMondayWeek + 86400000 
