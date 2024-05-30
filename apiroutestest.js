@@ -1,4 +1,4 @@
-// GET GOALS AND TASKS VARIABLES AND FETCH
+// GET GOALS AND TASKS VARIABLES AND FETCH OK
 
 // currentDate = new Date()
 // //negative numbers to go foward 
@@ -16,21 +16,21 @@
 // .then(res=>res.json())
 // .then(dados=>{console.log(dados)}) 
 
-// GET SCHEDULE
+// GET SCHEDULE OK
 
 // const endpoint = "http://127.0.0.1:3000/schedule"
 // fetch(endpoint,{method:"GET"})
 // .then(res=>res.json())
 // .then(dados=>console.log(dados))
 
-// GET CONTACTS
+// GET CONTACTS OK
 
 // const endpoint = "http://127.0.0.1:3000/contacts"
 // fetch(endpoint,{method:"GET"})
 // .then(res=>res.json())
 // .then(dados=>console.log(dados))
 
-// POST NEW GOAL OR TASK (I will create a function e it will be called on the event)
+// POST NEW GOAL OR TASK OK
 
 // const endpoint = "http://127.0.0.1:3000/goalsandtasks"
 // const myHeaders = new Headers({"Content-Type": "application/json"});
@@ -63,7 +63,7 @@
 // .then(res=>res.json())
 // .then(dados=>(console.log(dados)))
 
-//PATCH (UPDATE) GOALS AND TASKS
+//PATCH (UPDATE) GOALS AND TASKS OK
 
 // const id = 45
 // const myHeaders = new Headers({"Content-Type": "application/json"})
@@ -111,7 +111,7 @@
 // .then(res=>res.json())
 // .then(dados=>(console.log(dados)))
 
-//DELETE GOALS AND TASKS
+//DELETE GOALS AND TASKS OK
 // const id = 44
 // const endpoint = `http://127.0.0.1:3000/goalsandtasks;${id}`
 

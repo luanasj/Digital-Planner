@@ -8,7 +8,12 @@ let pastOrFoward = 1
 const pastOrFowardRegularizer = (pastOrFoward == 0 ? ()=>{pastOrFoward=-1 ; return -1} : pastOrFoward)
 const mondayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * pastOrFowardRegularizer * 86400000) + 86400000 
 const sundayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * pastOrFowardRegularizer * 86400000) + (86400000 * 7) 
-const dayofweekstr = (dtMilisec)=>{return new Date(dtMilisec).toJSON().slice(0,10)}
+const dayofweekstr = (dtMilisec)=>{
+    const data = new Date(dtMilisec).toLocaleDateString().split("/")
+    return `${data[2]}-${data[1]}-${data[0]}`
+}
+
+
 
 tabBtns.forEach((el)=>{
     el.addEventListener("click",(evt)=>{
@@ -45,6 +50,8 @@ const weatherData = (lat,long)=> {
 const success = (pos)=>{
     const lat = pos.coords.latitude
     const long = pos.coords.longitude
+    // console.log(lat)
+    // console.log(long)
     weatherData(lat,long)
    
 }
@@ -55,7 +62,7 @@ const err = ()=>{
 }
 
 
-const weatherFill = ()=>navigator.geolocation.getCurrentPosition(success, err)
+const weatherFill = ()=>{navigator.geolocation.getCurrentPosition(success, err)}
 weatherFill()
 
 const quoteData = ()=>{
@@ -82,22 +89,61 @@ quoteData()
 
 const fetchGoalsAndTasksGet = async ()=> {
 
-// const mondayDateString = dayofweekstr(mondayOfTheWeekMilisec)
-    // const sundayDateString = dayofweekstr(sundayOfTheWeekMilisec)
+    const mondayDateString = dayofweekstr(mondayOfTheWeekMilisec)
+    const sundayDateString = dayofweekstr(sundayOfTheWeekMilisec)
+    // console.log(mondayDateString)
     
-    // const endpoint = "http://127.0.0.1:3000/getgoalsandtasks"
-    // const myHeaders = new Headers({"Content-Type": "application/json"})
-    // fetch(endpoint,{method: "POST", headers: myHeaders ,body: JSON.stringify({data1:mondayDateString,data2:sundayDateString})})
-    // .then(res=>res.json())
-    // .then(dados=>{console.log(dados)}) 
-    
-    
-return await fetch("tasks_goals_data.json")
-        .then(res=>res.json())
-        .then(data=>{
-            return data
+    const endpoint = "http://127.0.0.1:3000/getgoalsandtasks"
+    const myHeaders = new Headers({"Content-Type": "application/json"})
 
-})}
+    return await fetch(endpoint,{method: "POST", headers: myHeaders , body: JSON.stringify({data1:mondayDateString,data2:sundayDateString})})
+    .then(res=>res.json())
+    .then(dados=>{return dados[0]})  
+    
+}
+
+const fetchGoalsAndTasksInsert = async (dsc,typenum,dt)=>{ //create new goal or task
+
+const endpoint = "http://127.0.0.1:3000/goalsandtasks"
+const myHeaders = new Headers({"Content-Type": "application/json"});
+const body = {
+    dsc: dsc, 
+    typenum: (typenum == 'goal' ? 1 : 2), 
+    acc: false, 
+    dt: dt 
+}
+
+    return fetch(endpoint,{method:"POST", headers: myHeaders, body: JSON.stringify(body)})
+    .then(res=>res.json())
+    .then(answer=>{return answer})
+
+}
+
+const fetchGoalsAndTasksUpdate = async (id,campo,entrada)=>{
+
+const myHeaders = new Headers({"Content-Type": "application/json"})
+const endpoint = `http://127.0.0.1:3000/goalsandtasks;${id}`
+
+const body = {
+    campo: campo, //campo must be "description" or "acc" && entrada must be a string
+    entrada: entrada 
+}
+
+return fetch(endpoint,{method:"PATCH", headers:myHeaders ,body: JSON.stringify(body)})
+.then(res=>res.json())
+.then(dados=>{return dados})
+}
+
+const fetchGoalsAndTasksDelete = async (id)=>{
+    const endpoint = `http://127.0.0.1:3000/goalsandtasks;${id}`
+
+    fetch(endpoint,{method:"DELETE"})
+    .then(res=>res.json())
+    .then(dados=>(console.log(dados)))
+
+}
+
+
     
     
 //  console.log(fetchGoalsAndTasksGet())
@@ -113,22 +159,31 @@ const data = await obj
     } else if (cat==2){
         return data.filter(
             (el)=>{
-                return (el.category==cat && el.date==date)
+                return (el.category==cat && el.date.slice(0,10)==date)
             }
         )
     } else {
         return "wrong cat input"
     }
 } 
-    
+
+
 const goals = filterGoalsAndTasks(fetchGoalsAndTasksGet(),1)
 const tasks = (dt)=>{
     return filterGoalsAndTasks(fetchGoalsAndTasksGet(),2,dt)}
-
     
-
-
-const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
+const goalsAndTasksRefresh = async (cat,dt,parsedDt,container)=>{
+    if(cat == 'goal'){
+        const dgoals = await goals
+        goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`))
+    } else if (cat == 'task'){
+        const dtasks = await tasks(dt)
+        goalsAndTasksFill(dtasks,cat,15,container,dt,new Date(parsedDt).getDay())
+    }
+    
+}
+    
+const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)=>{
     catsContainer.innerHTML = ''
     const catsAmount = [...catsContainer.children].filter(el=>{
         return el.children[0] && el.children[0].classList.contains('taskCheckbox')
@@ -142,6 +197,28 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
         const newcatInput = document.createElement('input')
         newcatInput.setAttribute('type','text')
         newcatInput.setAttribute('placeholder','Novo ...')
+        newcatInput.setAttribute('dbdt',`${dt}`)
+        newcatInput.addEventListener("keydown", (event) => {
+            if(event.key == "Enter" && event.target.value.length > 0){
+                
+                const postdt = (event.target.getAttribute('dbdt').length > 0 ? event.target.getAttribute('dbdt') : dayofweekstr(Date.now()))
+                console.log(postdt)
+                const postcat = event.target.parentNode.classList[0]
+                const postvalue = event.target.value
+                const parsedDate = Date.parse(postdt) + 86400000
+                const refreshContainer = event.target.parentNode.parentNode
+                
+                
+                fetchGoalsAndTasksInsert(postvalue,postcat,postdt)
+                .then(res => {
+                    console.log(res)
+                    goalsAndTasksRefresh(postcat,postdt,parsedDate,refreshContainer)
+                }).catch(res=>console.log(res))
+
+                console.log("new task")
+
+            }
+        })  
         newcat.appendChild(newcatInput)
     }
 
@@ -152,18 +229,94 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
         if (catDataObj[i] != undefined){
             const catCheckbox = document.createElement('input')
             catCheckbox.setAttribute('type','checkbox')
-            catCheckbox.setAttribute('name',`${catName}${i}`)
-            catCheckbox.setAttribute('id',`${catName}${i}`)
+            catCheckbox.setAttribute('name',`${catName}${catDataObj[i].id}`)
+            catCheckbox.setAttribute('id',`${catName}${catDataObj[i].id}`)
             catCheckbox.classList.add(`${catName}Checkbox`)
             if(catDataObj[i].accomplished == true) {catCheckbox.setAttribute('checked','checked')}
+            catCheckbox.addEventListener('input',(evt)=>{
+                const updtdsc = `${evt.target.checked}`
+                const updtid = evt.target.nextSibling.firstChild.getAttribute('dbid')
+                // const rfrcat = evt.target.parentNode.classList[0]
+                // const rfrdt = evt.target.nextSibling.firstChild.getAttribute('dbdt').slice(0,10)
+                // const rfrparsedDt = Date.parse(rfrdt) + 86400000
+                // const rfrcontainer = evt.target.parentNode.parentNode
+                // console.log(rfrcat)
+                // console.log(rfrdt)
+                // console.log(rfrparsedDt)
+                // console.log(rfrcontainer)
+                // console.log(updtdsc) //boolean, must be converted to string
+                // console.log(updtid)
+                fetchGoalsAndTasksUpdate(updtid,"acc",updtdsc)
+                .then(
+                    res=>{
+                        console.log(res)
+                        // goalsAndTasksRefresh(rfrcat,rfrdt,rfrparsedDt,rfrcontainer)
+                    }
+                ).catch(
+                        res=>console.log(res)
+                    )
+                
+            })
             catLi.appendChild(catCheckbox)
             const catLabel = document.createElement('label')
-            catLabel.setAttribute('for',`${catName}${i}`)
+            catLabel.setAttribute('for',`${catName}${catDataObj[i].id}`)
             catLi.appendChild(catLabel)
             const catText = document.createElement('input')
             catText.setAttribute('type','text')
             catText.setAttribute('value', catDataObj[i].description)
+            catText.setAttribute('dbid',`${catDataObj[i].id}`)
+            catText.setAttribute('dbcat',`${catDataObj[i].category}`)
+            catText.setAttribute('dbdt',`${catDataObj[i].date}`)
             catText.setAttribute('readonly','readonly')
+            catText.addEventListener("dblclick", (event) => {
+                event.target.removeAttribute("readonly")
+                
+            })
+            catText.addEventListener("keydown", (event) => {
+                if(event.key == "Enter"){
+                    const dbid = event.target.getAttribute('dbid')
+                    const dscvalue = event.target.value
+                    const rfrcat = event.target.parentNode.parentNode.classList[0]
+                    const rfrdt = event.target.getAttribute('dbdt').slice(0,10)
+                    const rfrparsedDt = Date.parse(rfrdt) + 86400000
+                    const rfrcontainer = event.target.parentNode.parentNode.parentNode
+                    
+                    // console.log(rfrcontainer)
+
+                    // console.log(rfrcat)
+                    // console.log(rfrdt)
+                    // console.log(dbid)
+                    // console.log(dscvalue)
+                    if(dscvalue.length > 0){
+                        event.target.setAttribute("readonly","readonly")
+                        fetchGoalsAndTasksUpdate(dbid,"description",dscvalue)
+                    .then(
+                        res=>{
+                            console.log(res)
+                            // 
+                        }
+                    ).catch(
+                            res=>console.log(res)
+                        )
+                    }else{
+                        fetchGoalsAndTasksDelete(dbid)
+                        .then(res=>{
+                            goalsAndTasksRefresh(rfrcat,rfrdt,rfrparsedDt,rfrcontainer)
+
+                        }).catch(res=>console.log(res))
+
+                    }
+
+                    // 
+                    // console.log(event.target.value)
+                    // const updtdsc = `${evt.target.checked}`
+                    // const updtid = evt.target.nextSibling.firstChild.getAttribute('dbid')
+                    
+                }
+                else{
+                    return
+                }
+            })
             catLabel.appendChild(catText)
             catsContainer.insertBefore(catLi,newcat)
         } else {
@@ -179,9 +332,11 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dayWeek)=>{
 const dailyTasksFill = async ()=> {
     const dgoals = await goals
     const dtasks = await tasks(dayofweekstr(Date.now()))
+    console.log(dgoals)
+    console.log(dtasks)
     document.querySelector('#daily_toDo #dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
     goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`))
-    goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),currentDate.getDay())
+    goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),dayofweekstr(Date.now()),currentDate.getDay())
     
 }
 
@@ -189,16 +344,24 @@ if(document.querySelector('#daily_toDo')){
     dailyTasksFill()
 }
     
-const weekTasksFill = ()=>{
+const weekTasksFill = async ()=>{
 const weekToDoContainers = document.querySelectorAll('.tasksContainer')
 let dayofweek = mondayOfTheWeekMilisec
+const array = await fetchGoalsAndTasksGet()
+const arrfilter = (array,dt)=>{
+    return array.filter(
+        (el)=>{
+            return (el.category==2 && el.date.slice(0,10)==dt)
+        })
 
-    weekToDoContainers.forEach((container)=>{ 
+}
+
+    weekToDoContainers.forEach((container)=>{
         const day = dayofweek
-            tasks(dayofweekstr(dayofweek))
-            .then(res=>{                
-                goalsAndTasksFill(res,'task',15,container,new Date(day).getDay())
-            })
+        const res = arrfilter(array,dayofweekstr(day))
+                          
+                goalsAndTasksFill(res,'task',15,container,dayofweekstr(day),new Date(day).getDay())
+            
         dayofweek = dayofweek + 86400000 
     })
 }         
@@ -208,73 +371,126 @@ if(document.querySelector('.weeklyToDoTop')){
 }  
 
 
+const scheduleFetchGet = async ()=>{
+const endpoint = "http://127.0.0.1:3000/schedule"
+return fetch(endpoint,{method:"GET"})
+    .then(res=>res.json())
+    .then(dados=>{
+        console.log(dados)  
+        return dados 
+    })
+}
 
-fetch("schedule.json")
-.then(res=>res.json())
-.then(dados=>{
-    const schedulefilter = (scheduleDay)=>{
-        return dados.filter((el)=>{
-            return el.dayWeek == scheduleDay
-        })
+const scheduleFetchUpdate = async (activity,day,period)=>{
+    const activitytreatment = (activity.length > 0 ? activity : null)
+    console.log(activitytreatment)
+    const endpoint = `http://127.0.0.1:3000/schedule`
+    const myHeaders = new Headers({"Content-Type": "application/json"})
+    const body = {
+        newActivity: activitytreatment , 
+        dayweek: day, 
+        scperiod: period 
     }
     
-    const scheduleFill = (schEl,obj,day,num)=>{
-        
-    // for(let count = 0; count < num;i++){
-        for (let i in obj){
+    return await fetch(endpoint,{method:"PATCH", headers: myHeaders, body: JSON.stringify(body)})
+    .then(res=>res.json())
+    .then(dados=>{console.log(dados);return dados})
+}
 
-            if (obj[i].activity == null){
-                    schEl[i].children[num].children[0].setAttribute('value','')
-            } else {
-                    schEl[i].children[num].children[0].setAttribute('value',`${obj[i].activity}`)
-                    schEl[i].children[num].classList.add(`${daysOfTheWeek_En[day]}`)
-                    schEl[i].children[num].children[0].setAttribute('readonly','readonly')
-                } 
-            
+
+const schedulefilter = async (promise,scheduleDay)=>{
+    const dados = await promise
+    return dados.filter((el)=>{
+        return el.i_dayweek_schedule == scheduleDay
+    })
+}
+
+
+
+const scheduleFill = (schElements,obj,day,num)=>{
+    
+    
+    for (let i in obj){
+
+        if (obj[i].s_activity_schedule == null){
+                schElements[i].children[num].children[0].setAttribute('value','')
+                schElements[i].children[num].classList.remove(`${daysOfTheWeek_En[day]}`)
+        } else {
+                schElements[i].children[num].children[0].setAttribute('value',`${obj[i].s_activity_schedule}`)
+                schElements[i].children[num].classList.add(`${daysOfTheWeek_En[day]}`)
+                schElements[i].children[num].children[0].setAttribute('readonly','readonly')
+                schElements[i].children[num].children[0].addEventListener("dblclick", (event) => {
+                        event.target.removeAttribute("readonly")
+                    })
+                
+            } 
+            console.log('schweekfill acionada')
+            schElements[i].children[num].children[0].setAttribute('period',`${obj[i].i_period_schedule}`)
+            schElements[i].children[num].children[0].setAttribute('day',`${obj[i].i_dayweek_schedule}`)
+            schElements[i].children[num].children[0].addEventListener("keydown", (event) => {
+                if(event.key == "Enter"){
+                    event.target.setAttribute("readonly","readonly")
+                    const period = event.target.getAttribute('period')
+                    const day = event.target.getAttribute('day')
+                    const activity = event.target.value
+                    if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
+                            // const schftch = await scheduleFetchUpdate(activity,day,period)
+                            // console.log(schftch)
+                            // scheduleDayFill()
+                        
+                    } else if(document.querySelectorAll('.week_schedule tbody').length > 0) {
+                            // const schftch = await scheduleFetchUpdate(activity,day,period)
+                            // console.log(schftch)
+                            scheduleFetchUpdate(activity,day,period)
+                            .then((res)=>{
+
+                                scheduleWeekFill()
+    
+                            })
+                    }
+                    
+    
+                }
+                
+            })   
+    }
+}
+        
+const scheduleDayFill = async ()=>{
+    const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
+    const schOfDay = await schedulefilter(scheduleFetchGet(),currentDate.getDay())
+    scheduleFill(dailySchedule,schOfDay,currentDate.getDay(),1)
+    
+
+}
+
+const scheduleWeekFill = async ()=>{
+    
+    const weekSchedule = document.querySelectorAll('.week_schedule tbody .scheduleRow')
+    // console.log(weekSchedule)
+    const scheduleDays = [1,2,3,4,5,6,0]
+    const scharray = await scheduleFetchGet()
+    
+    scheduleDays.forEach((day)=>{
+        
+        schedulefilter(scharray,day)
+        .then(
+            schOfDay=>{
+                scheduleFill(weekSchedule,schOfDay,day,(scheduleDays.indexOf(day)+1))    
             }
-    }
-        
+        )   
+    })
+}
 
-    // }
-    
+if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
+    scheduleDayFill()
+}
 
-    if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
-        const dailySchedule = document.querySelectorAll(".daily_schedule .scheduleRow")
-        scheduleFill(dailySchedule,schedulefilter(currentDate.getDay()),currentDate.getDay(),1)
-        
-    }
-
-    if(document.querySelectorAll('.week_schedule tbody').length > 0) {
-        const weekSchedule = document.querySelectorAll('.week_schedule tbody .scheduleRow')
-        const scheduleDays = [1,2,3,4,5,6,0]
-       
-        scheduleDays.forEach((day)=>{
-            scheduleFill(weekSchedule,schedulefilter(day),day,(scheduleDays.indexOf(day)+1))
-        })
-       console.log(schedulefilter(0))
-       
-       
-       
-       
-       
-        
-
-    }
-        
-    
-
-    
-        
-    
-
-    
-})
+if(document.querySelectorAll('.week_schedule tbody').length > 0) {
+    scheduleWeekFill()
+}
 
 const contactsFill = (data)=>{
-
-    
-    
-
 
     data.forEach((obj)=>{
     const contactsCardsSection = document.querySelector('#contactsCards')
@@ -285,7 +501,7 @@ const contactsFill = (data)=>{
     if(contactsCardsSection){
         contactsCardsSection.appendChild(contact)
     }
-    
+
 
     const contactContent = document.createElement('div')
     contactContent.setAttribute('id',`contactContent${obj.id}`)
@@ -312,7 +528,6 @@ const contactsFill = (data)=>{
     cardTools.appendChild(toolCheckbox)
 
         for (prop in obj) {
-            // console.log(prop)`
             if(prop != 'id'){
                 const infoLabel = document.createElement('span')
                 infoLabel.classList.add(`contact${prop}`,'infoLabel')
@@ -333,37 +548,29 @@ const contactsFill = (data)=>{
                 infoLabel.appendChild(infoText)
                 contactContent.appendChild(infoLabel)
 
-
             }
-            
-
+        
         }
 
     })
 
-//     <div id="contact1" class="contactCard">
-//     <div id="contactContent1" class="contactInfo">
-//         <span class="contactName infoLabel">Nome:<span class="infoText">Bruno Almeida</span></span>
-//         <span class="contactBond infoLabel">Vínculo:<span class="infoText">Professor</span></span>
-//         <span class="contactSubject infoLabel">Disciplina:<span class="infoText">MATA01 - Calculo A</span></span>
-//         <span class="contactEmail infoLabel">Email:<span class="infoText">bruno123@outlook.com.br</span></span>
-//         <span class="contactTel infoLabel">Telefone:<span class="infoText">999999999</span></span>
-//         <span class="contactLink infoLabel">Link:<span class="infoText"><a href="www.randomurl.com/lorem/ipsum">www.randomurl.com/lorem/ipsum</a></span></span>
-//         <span class="contactInstitution infoLabel">Instituição:<span class="infoText">UFBA - Universidade Federal da Bahia</span></span>
-//     </div>
-//     <div class="cardTools">
-//         <button class="toolButton"><i class="ph ph-pencil"></i></button>
-//         <input type="checkbox" name="contactCheckbox1" id="contactCheckbox1" class="contactCheckbox">
-//     </div>    
-// </div>
 }
 
+const contactsFetchGet = ()=>{
+    const endpoint = "http://127.0.0.1:3000/contacts"
 
-fetch('contacts.json')
-.then(res=>res.json())
-.then(dados=>{
- contactsFill(dados)
-})
+    fetch(endpoint,{method:"GET"})
+    .then(res=>res.json())
+    .then(dados=>{
+    contactsFill(dados[0])
+    })
+}
+
+contactsFetchGet()
+
+console.log("page load")
+
+
 
 
 
