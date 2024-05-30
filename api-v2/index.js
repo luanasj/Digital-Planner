@@ -2,6 +2,13 @@ const express = require('express')
 const rotas = require('./resources/appointmentbook.routes')
 const porta = process.env.PORT || 3000
 const app = express()
+var cors = require('cors');
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+  }
+  
+app.use(cors(corsOptions));
 
 // app.use('/', rotas) //usa o modulo rotas partindo da rota raiz '/'
 

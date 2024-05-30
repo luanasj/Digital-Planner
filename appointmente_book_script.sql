@@ -318,7 +318,14 @@ delimiter $$
 create procedure goalsAnsTasksSelect(in date1 date,in date2 date)
 begin 
 
-select * from goalsAndTasks
+select 
+	i_id_goalsAndTasks as id, 
+	s_description_goalsAndTasks as description, 
+	i_type_goalsAndTasks as category, 
+	b_accomplished_goalsAndTasks as accomplished, 
+	d_date_goalsAndTasks as date, 
+	i_dayweek_goalsAndTasks as dayweek
+from goalsAndTasks
 where i_type_goalsAndTasks = 1 or
 d_date_goalsAndTasks between date1 and date2;
 

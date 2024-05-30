@@ -35,7 +35,7 @@ const getSchedule = async ()=>{
 const getContacts = async ()=>{
     try{
         const con = await db.conectar()
-        let sql = "select * from contacts;";
+        let sql = "call contactsSelect();";
         const [linhas] = await con.query(sql)
         return await linhas
     }catch(e){
