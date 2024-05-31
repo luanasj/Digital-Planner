@@ -490,10 +490,15 @@ if(document.querySelectorAll('.week_schedule tbody').length > 0) {
     scheduleWeekFill()
 }
 
-const contactsFill = (data)=>{
+
+
+
+const contactsFill = async (prms)=>{
+    const data = await prms
+    const contactsCardsSection = document.querySelector('#contactsCards')
+    contactsCardsSection.innerHTML = ''
 
     data.forEach((obj)=>{
-    const contactsCardsSection = document.querySelector('#contactsCards')
 
     const contact = document.createElement('div')
     contact.setAttribute('id', `contact${obj.id}`)
@@ -518,12 +523,18 @@ const contactsFill = (data)=>{
 
     const toolIcon = document.createElement('i')
     toolIcon.classList.add('ph','ph-pencil')
+    toolIcon.setAttribute('dbid',`${obj.id}`)
+    toolIcon.addEventListener('click',(evt)=>{
+        showContactsEditor({nomectt:`${obj.Nome}`,vinculo:`${obj.Vínculo}`,disciplina:`${obj.Disciplina}`,email:`${obj.Email}`,telefone:`${obj.Telefone}`,sitectt:`${obj.Site}`,instituicao:`${obj.Instituição}`})
+        contactsEditorAddFunctions(contactsFetchUpdate,obj.id) 
+    })
     toolButton.appendChild(toolIcon)
 
     const toolCheckbox = document.createElement('input')
     toolCheckbox.setAttribute('type','checkbox')
     toolCheckbox.setAttribute('name',`contactCheckbox${obj.id}`)
     toolCheckbox.setAttribute('id',`contactCheckbox${obj.id}`)
+    toolCheckbox.setAttribute('dbid',`${obj.id}`)
     toolCheckbox.classList.add("contactCheckbox")
     cardTools.appendChild(toolCheckbox)
 
@@ -556,17 +567,160 @@ const contactsFill = (data)=>{
 
 }
 
-const contactsFetchGet = ()=>{
+const contactsFetchGet = async ()=>{
     const endpoint = "http://127.0.0.1:3000/contacts"
 
-    fetch(endpoint,{method:"GET"})
+    return fetch(endpoint,{method:"GET"})
     .then(res=>res.json())
     .then(dados=>{
-    contactsFill(dados[0])
+        return dados[0]
     })
 }
 
-contactsFetchGet()
+
+const contactsFetchInsert = async (nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao) => {
+    const endpoint = "http://127.0.0.1:3000/contacts"
+    const myHeaders = new Headers({"Content-Type": "application/json"});
+    const body = {
+        nomectt: nomectt,
+        vinculo: vinculo,
+        disciplina: disciplina,
+        email: email,
+        telefone: telefone,
+        sitectt: sitectt,
+        instituicao: instituicao
+    }
+
+    return fetch(endpoint,{method:"POST", headers: myHeaders, body: JSON.stringify(body)})
+    .then(res=>res.json())
+    .then(dados=>{return dados})
+}
+
+const contactsFetchUpdate = async (nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao,id)=>{
+
+    const endpoint = `http://127.0.0.1:3000/contacts;${id}`
+    const myHeaders = new Headers({"Content-Type": "application/json"});
+    const body = {
+        nomectt: nomectt,
+        vinculo: vinculo,
+        disciplina: disciplina,
+        email: email,
+        telefone: telefone,
+        sitectt: sitectt,
+        instituicao: instituicao
+    }
+
+    return fetch(endpoint,{method:"PATCH", headers: myHeaders, body: JSON.stringify(body)})
+    .then(res=>res.json())
+    .then(dados=>{return dados})
+}
+
+const contactsFetchDelete = async (id)=>{
+    const endpoint = `http://127.0.0.1:3000/contacts;${id}`
+
+    return fetch(endpoint,{method:"DELETE"})
+    .then(res=>res.json())
+    .then(dados=>{return dados})
+}
+
+const showContactsEditor = (data)=>{
+    const editPanel = document.querySelector('#editContact')
+    editPanel.style.display = 'flex'
+
+    const nome = document.querySelector('#nameEdit')
+    const vin = document.querySelector('#bondEdit')
+    const dt = document.querySelector('#subjectEdit')
+    const mail = document.querySelector('#emailEdit') 
+    const tel = document.querySelector('#telEdit') 
+    const st = document.querySelector('#linkEdit') 
+    const inst = document.querySelector('#institutionEdit')
+
+
+    if(data){
+        nome.value = data.nomectt
+        vin.value = data.vinculo
+        dt.value = data.disciplina
+        mail.value = data.email
+        tel.value = data.telefone
+        st.value = data.sitectt
+        inst.value = data.instituicao
+    } else { 
+        nome.value = ""
+        vin.value = ""
+        dt.value = ""
+        mail.value = ""
+        tel.value = ""
+        st.value = ""
+        inst.value = ""
+
+    }
+    
+}
+
+const hideContactsEditor = ()=>{
+    const editPanel = document.querySelector('#editContact')
+    const editForm = editPanel.querySelector('#editContent')
+    const editBtns = editForm.querySelector('.editBtns')
+    const editBtnsClone = editBtns.cloneNode(true)
+    editBtns.remove()
+    editForm.appendChild(editBtnsClone)
+    editPanel.style.display = 'none'
+
+
+}
+
+const testMethod = ()=>{ //ONLY A TEST
+    console.log('test successful')
+}
+     
+
+const contactsEditorAddFunctions = (okBtnMethod,id)=>{
+    document.querySelector('#editOkBtn').addEventListener('click',async (evt)=>{
+        const nome = document.querySelector('#nameEdit').value
+        const vinculo = document.querySelector('#bondEdit').value
+        const disciplina = document.querySelector('#subjectEdit').value
+        const email = document.querySelector('#emailEdit').value
+        const telefone = document.querySelector('#telEdit').value
+        const site = document.querySelector('#linkEdit').value
+        const instituicao = document.querySelector('#institutionEdit').value
+        const res = await okBtnMethod(nome,vinculo,disciplina,email,telefone,site,instituicao,id)
+        console.log(id)
+        console.log(res)
+        hideContactsEditor()
+        await contactsFill(contactsFetchGet())
+        
+    })
+    document.querySelector('#editCancelBtn').addEventListener('click',(evt)=>{
+        hideContactsEditor()
+    })
+    
+}
+
+const contactsHeaderAddFunctions = ()=>{
+    document.querySelector('#newContact_btn').addEventListener('click',(evt)=>{
+        showContactsEditor()
+        contactsEditorAddFunctions(contactsFetchInsert) 
+    })
+    document.querySelector('#del_btn').addEventListener('click',async (evt)=>{
+        const checkedcheckboxes = document.querySelectorAll('.contactCheckbox:checked')
+        checkedcheckboxes.forEach((el)=>{
+            contactsFetchDelete(el.getAttribute('dbid'))
+            console.log(el.getAttribute('dbid'))
+            el.parentNode.parentNode.remove()
+        })
+        // console.log(checkedcheckboxes)
+
+    })
+    document.querySelector('#selectAll_btn').addEventListener('input',(evt)=>{
+        
+    })
+}
+
+contactsHeaderAddFunctions()
+contactsFill(contactsFetchGet())
+
+
+
 
 console.log("page load")
 

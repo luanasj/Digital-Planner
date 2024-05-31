@@ -83,7 +83,7 @@ header{
 
 
 
-.tabBtn{
+.tabBtn,.editBtn{
     padding: 5px;
     border-radius: 5px;
     background-color: #fff;
@@ -92,7 +92,8 @@ header{
     cursor: pointer;
 }
 
-.tabBtn:hover{
+
+.tabBtn:hover,.editBtn:hover{
     background-color: #000 !important;
     color: #fff !important;
 }
@@ -653,10 +654,16 @@ header{
     outline: 0;
 }
 
-.editButton{
-    border: 1px solid #d60b0b;
+.editBtns{
+    display: flex;
+    width: 40%;
+    justify-content: space-evenly;
+        /* border: 1px solid #d60b0b; */
+
 
 }
+
+
 
 /* GENERAL: DAYS COLORS */
 
