@@ -150,11 +150,11 @@
                 </div>
             </div>  -->
         </section>
-        <div id="editContact" class="editContact">
+        <section id="editContact" class="editContact">
             <form id="editContent" class="editContent">
                 <div class="editInfo">
                     <label for="nameEdit">Nome:</label>
-                    <input type="text" name="nameEdit" id="nameEdit" class="editInput">
+                    <input type="text" name="nameEdit" id="nameEdit" class="editInput" required>
                 </div>
                 <div class="editInfo">
                     <label for="bondEdit">Vínculo:</label>
@@ -180,13 +180,12 @@
                     <label for="institutionEdit">Instituto:</label>
                     <input type="text" name="institutionEdit" id="institutionEdit" class="editInput">
                 </div>
-                <div class="editButton">
-                    <button id="editOkBtn" class="tabBtn">OK</button>
-                    <button id="editCancelBtn" class="tabBtn">Cancel</button>
+                <div class="editBtns" >
+                    <button type="button" id="editOkBtn" class="editBtn" type="button"> OK </button>
+                    <button type="button" id="editCancelBtn" class="editBtn"> Cancel </button>
                 </div>
             </form>
-            
-        </div>
+        </section>
 </main>
 <script src="script.js"></script>
 </body>
