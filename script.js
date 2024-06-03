@@ -12,6 +12,7 @@ const dayofweekstr = (dtMilisec)=>{
     const data = new Date(dtMilisec).toLocaleDateString().split("/")
     return `${data[2]}-${data[1]}-${data[0]}`
 }
+let contactsCounter = 0
 
 
 
@@ -137,7 +138,7 @@ return fetch(endpoint,{method:"PATCH", headers:myHeaders ,body: JSON.stringify(b
 const fetchGoalsAndTasksDelete = async (id)=>{
     const endpoint = `http://127.0.0.1:3000/goalsandtasks;${id}`
 
-    fetch(endpoint,{method:"DELETE"})
+    return fetch(endpoint,{method:"DELETE"})
     .then(res=>res.json())
     .then(dados=>(console.log(dados)))
 
@@ -168,14 +169,14 @@ const data = await obj
 } 
 
 
-const goals = filterGoalsAndTasks(fetchGoalsAndTasksGet(),1)
+const goals = async () => {return await filterGoalsAndTasks(fetchGoalsAndTasksGet(),1)}
 const tasks = (dt)=>{
     return filterGoalsAndTasks(fetchGoalsAndTasksGet(),2,dt)}
     
 const goalsAndTasksRefresh = async (cat,dt,parsedDt,container)=>{
     if(cat == 'goal'){
-        const dgoals = await goals
-        goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`))
+        const dgoals = await goals()
+        goalsAndTasksFill(dgoals,'goal',10,container,dayofweekstr(Date.now()))
     } else if (cat == 'task'){
         const dtasks = await tasks(dt)
         goalsAndTasksFill(dtasks,cat,15,container,dt,new Date(parsedDt).getDay())
@@ -186,7 +187,7 @@ const goalsAndTasksRefresh = async (cat,dt,parsedDt,container)=>{
 const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)=>{
     catsContainer.innerHTML = ''
     const catsAmount = [...catsContainer.children].filter(el=>{
-        return el.children[0] && el.children[0].classList.contains('taskCheckbox')
+        return el.children[0] && el.children[0].classList.contains(`${catName}Checkbox`)
     })
 
 
@@ -211,7 +212,6 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
                 
                 fetchGoalsAndTasksInsert(postvalue,postcat,postdt)
                 .then(res => {
-                    console.log(res)
                     goalsAndTasksRefresh(postcat,postdt,parsedDate,refreshContainer)
                 }).catch(res=>console.log(res))
 
@@ -298,7 +298,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
                     ).catch(
                             res=>console.log(res)
                         )
-                    }else{
+                    }else {
                         fetchGoalsAndTasksDelete(dbid)
                         .then(res=>{
                             goalsAndTasksRefresh(rfrcat,rfrdt,rfrparsedDt,rfrcontainer)
@@ -312,8 +312,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
                     // const updtdsc = `${evt.target.checked}`
                     // const updtid = evt.target.nextSibling.firstChild.getAttribute('dbid')
                     
-                }
-                else{
+                } else{
                     return
                 }
             })
@@ -330,12 +329,12 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
 }
     
 const dailyTasksFill = async ()=> {
-    const dgoals = await goals
+    const dgoals = await goals()
     const dtasks = await tasks(dayofweekstr(Date.now()))
     console.log(dgoals)
     console.log(dtasks)
     document.querySelector('#daily_toDo #dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
-    goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`))
+    goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`),dayofweekstr(Date.now()))
     goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),dayofweekstr(Date.now()),currentDate.getDay())
     
 }
@@ -434,9 +433,13 @@ const scheduleFill = (schElements,obj,day,num)=>{
                     const day = event.target.getAttribute('day')
                     const activity = event.target.value
                     if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
-                            // const schftch = await scheduleFetchUpdate(activity,day,period)
+                            // const schftch = await 
                             // console.log(schftch)
-                            // scheduleDayFill()
+                            // 
+                            scheduleFetchUpdate(activity,day,period)
+                            .then((res)=>{
+                                scheduleDayFill()
+                            })
                         
                     } else if(document.querySelectorAll('.week_schedule tbody').length > 0) {
                             // const schftch = await scheduleFetchUpdate(activity,day,period)
@@ -496,7 +499,7 @@ if(document.querySelectorAll('.week_schedule tbody').length > 0) {
 const contactsFill = async (prms)=>{
     const data = await prms
     const contactsCardsSection = document.querySelector('#contactsCards')
-    contactsCardsSection.innerHTML = ''
+
 
     data.forEach((obj)=>{
 
@@ -530,13 +533,13 @@ const contactsFill = async (prms)=>{
     })
     toolButton.appendChild(toolIcon)
 
-    const toolCheckbox = document.createElement('input')
-    toolCheckbox.setAttribute('type','checkbox')
-    toolCheckbox.setAttribute('name',`contactCheckbox${obj.id}`)
-    toolCheckbox.setAttribute('id',`contactCheckbox${obj.id}`)
-    toolCheckbox.setAttribute('dbid',`${obj.id}`)
-    toolCheckbox.classList.add("contactCheckbox")
-    cardTools.appendChild(toolCheckbox)
+        const toolCheckbox = document.createElement('input')
+        toolCheckbox.setAttribute('type','checkbox')
+        toolCheckbox.setAttribute('name',`contactCheckbox${obj.id}`)
+        toolCheckbox.setAttribute('id',`contactCheckbox${obj.id}`)
+        toolCheckbox.setAttribute('dbid',`${obj.id}`)
+        toolCheckbox.classList.add("contactCheckbox")
+        cardTools.appendChild(toolCheckbox)
 
         for (prop in obj) {
             if(prop != 'id'){
@@ -565,10 +568,12 @@ const contactsFill = async (prms)=>{
 
     })
 
+
 }
 
-const contactsFetchGet = async ()=>{
-    const endpoint = "http://127.0.0.1:3000/contacts"
+
+const contactsFetchGet = async (i)=>{
+    const endpoint = `http://127.0.0.1:3000/contacts;${i}`
 
     return fetch(endpoint,{method:"GET"})
     .then(res=>res.json())
@@ -623,6 +628,34 @@ const contactsFetchDelete = async (id)=>{
     .then(dados=>{return dados})
 }
 
+const contactsFetchSearch = async (col,searchstr)=>{
+    const endpoint = `http://127.0.0.1:3000/contactsSearch`
+    myHeaders = new Headers({"Content-Type": "application/json"});
+    body = {
+        col: col,
+        searchstr: searchstr
+    }
+
+    return fetch(endpoint,{method:"POST", headers:myHeaders, body: JSON.stringify(body)})
+    .then(res=>res.json())
+    .then(dados=>{
+        console.log(dados)
+        return dados[0]})
+
+}
+
+const getContactsCount = async ()=>{
+    
+    const endpoint = "http://127.0.0.1:3000/getContactsCount"
+    return fetch(endpoint,{methord:'GET'})
+    .then(res=>res.text())
+    .then(dados=>{
+        // console.log(((parseInt(dados) / divnum) > 1 ? true : false))
+        return parseInt(dados)
+
+    })
+}
+
 const showContactsEditor = (data)=>{
     const editPanel = document.querySelector('#editContact')
     editPanel.style.display = 'flex'
@@ -659,19 +692,23 @@ const showContactsEditor = (data)=>{
 
 const hideContactsEditor = ()=>{
     const editPanel = document.querySelector('#editContact')
-    const editForm = editPanel.querySelector('#editContent')
-    const editBtns = editForm.querySelector('.editBtns')
-    const editBtnsClone = editBtns.cloneNode(true)
-    editBtns.remove()
-    editForm.appendChild(editBtnsClone)
+    // const editForm = editPanel.querySelector('#editContent')
+    // const editBtns = editForm.querySelector('.editBtns')
+    // const editBtnsClone = editBtns.cloneNode(true)
+    // editBtns.remove()
+    // editForm.appendChild(editBtnsClone)
     editPanel.style.display = 'none'
 
 
 }
 
-const testMethod = ()=>{ //ONLY A TEST
-    console.log('test successful')
+const contactsCardsClear = ()=>{
+    const contactsCardsSection = document.querySelector('#contactsCards')
+    contactsCardsSection.innerHTML = ''
 }
+// const testMethod = ()=>{ //ONLY A TEST
+//     console.log('test successful')
+// }
      
 
 const contactsEditorAddFunctions = (okBtnMethod,id)=>{
@@ -687,12 +724,13 @@ const contactsEditorAddFunctions = (okBtnMethod,id)=>{
         console.log(id)
         console.log(res)
         hideContactsEditor()
-        await contactsFill(contactsFetchGet())
+        contactsCardsClear()
+        await contactsFill(contactsFetchGet(0))
         
-    })
+    },{once:true})
     document.querySelector('#editCancelBtn').addEventListener('click',(evt)=>{
         hideContactsEditor()
-    })
+    },{once:true})
     
 }
 
@@ -712,13 +750,61 @@ const contactsHeaderAddFunctions = ()=>{
 
     })
     document.querySelector('#selectAll_btn').addEventListener('input',(evt)=>{
+        if(evt.target.checked == true){
+            const uncheckedCheckboxes = document.querySelectorAll('.contactCheckbox:not(.contactCheckbox:checked)')
+            // console.log(uncheckedCheckboxes)
+            uncheckedCheckboxes.forEach((box)=>{
+                box.checked = true
+            })
+        }else{
+            const checkedcheckboxes = document.querySelectorAll('.contactCheckbox:checked')
+            checkedcheckboxes.forEach((box)=>{
+                box.checked = false
+            })
+        }
+    })
+    document.querySelector('#search_btn').addEventListener('click',(evt)=>{
+        const searchOption = document.querySelector('#searchCategories option:checked').getAttribute('dbcol')
+        const txt = document.querySelector('#searchText').value
+        document.querySelector('#contactsCards').innerHTML = ''
         
+
+        contactsFill(contactsFetchSearch(searchOption,txt))
+
     })
 }
 
-contactsHeaderAddFunctions()
-contactsFill(contactsFetchGet())
 
+const moreContacts = async ()=>{
+    const cttsqtt = await getContactsCount()
+    const contactsCardsSection = document.querySelector('#contactsCards')
+    if((cttsqtt / (contactsCounter + 20)) > 1 ){
+        const moreElements = document.createElement('div')
+        moreElements.innerHTML = 'carregar mais contatos'
+        moreElements.style.cursor = 'pointer'
+        moreElements.style.textAlign = 'center'
+        moreElements.addEventListener('click',(evt)=>{
+           contactsCounter += 20
+           contactsFill(contactsFetchGet(contactsCounter))
+            console.log(contactsCounter)
+            evt.target.remove()
+            moreContacts()
+              
+        })
+        contactsCardsSection.appendChild(moreElements)
+    }
+
+
+}
+
+const contactsUsualCardsFill = async () =>{
+    await contactsFill(contactsFetchGet(0))
+    await moreContacts()
+
+}
+
+contactsHeaderAddFunctions()
+contactsUsualCardsFill()
 
 
 

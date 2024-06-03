@@ -30,6 +30,19 @@
 // .then(res=>res.json())
 // .then(dados=>console.log(dados))
 
+//GET CONTACTS COUNT
+// let i = 1
+// const divnum = 20 * i
+
+// const endpoint = "http://127.0.0.1:3000/getContactsCount"
+// fetch(endpoint,{methord:'GET'})
+// .then(res=>res.text())
+// .then(dados=>{
+//     console.log(((parseInt(dados) / divnum) > 1 ? true : false))
+//     return parseInt(dados)
+
+// })
+
 // POST NEW GOAL OR TASK OK
 
 // const endpoint = "http://127.0.0.1:3000/goalsandtasks"
@@ -45,7 +58,7 @@
 // .then(res=>res.json())
 // .then(dados=>(console.log(dados)))
 
-//POST NEW CONTACT
+//POST NEW CONTACT OK
 
 // const endpoint = "http://127.0.0.1:3000/contacts"
 // const myHeaders = new Headers({"Content-Type": "application/json"});
@@ -78,7 +91,7 @@
 // .then(res=>res.json())
 // .then(dados=>(console.log(dados)))
 
-//PATCH (UPDATE) CONTACT
+//PATCH (UPDATE) CONTACT OK
 
 // const id = 20 //editável
 // const endpoint = `http://127.0.0.1:3000/contacts;${id}`
@@ -120,7 +133,7 @@
 // .then(res=>res.json())
 // .then(dados=>(console.log(dados)))
 
-//DELETE CONTACTS
+//DELETE CONTACTS OK
 // const id = 19
 // const endpoint = `http://127.0.0.1:3000/contacts;${id}`
 
