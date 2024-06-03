@@ -32,15 +32,27 @@ const getSchedule = async ()=>{
     
 }
 
-const getContacts = async ()=>{
+const getContacts = async (i)=>{
     try{
         const con = await db.conectar()
-        let sql = "call contactsSelect();";
-        const [linhas] = await con.query(sql)
+        let sql = "call contactsSelect(?);";
+        const [linhas] = await con.query(sql,i)
         return await linhas
     }catch(e){
         const erro = `erro: ${e}`
         return erro
+    }
+    
+}
+
+const getContactsCount = async () => {
+    try {
+        const con = await db.conectar()
+        let sql = "select count(*) as total from contacts;"
+        const [linhas] = await con.query(sql)
+        return linhas[0].total
+        } catch (error) {
+        return error
     }
     
 }
@@ -71,6 +83,9 @@ const createContact = async (contact) =>{
         if(!contact){
             throw new Error("information missing")
         }
+        if (!contact.nomectt){
+            throw new Error("Name is required")
+        }
         const {nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao} = contact
         let sql = "call insertContacts(?,?,?,?,?,?,?);"
         return await con.query(sql, [nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao]);
@@ -79,6 +94,21 @@ const createContact = async (contact) =>{
         return erro
     }
     
+}
+
+const contactsSearch = async (info)=>{
+    try {
+        const con = await db.conectar()
+        const {col,searchstr} = info
+        const sql = "call contactsSearch(?,?);"
+        const [linhas] = await con.query(sql,[col,searchstr])
+        console.log(info) 
+        console.log(linhas)
+        return linhas
+
+    } catch (error) {
+        return error
+    }
 }
 
 /*Patch*/
@@ -174,4 +204,4 @@ const deleteContact = async (id)=>{
 
 
 
-module.exports = {getWeekGoalsAndTasks,getSchedule,getContacts,createGoalOrTask,createContact,updateContacts,updateGoalsAndTasks,updateSchedule,deleteGoalsAndTasks,deleteContact}
+module.exports = {getWeekGoalsAndTasks,getSchedule,getContacts,createGoalOrTask,createContact,updateContacts,updateGoalsAndTasks,updateSchedule,deleteGoalsAndTasks,deleteContact,getContactsCount,contactsSearch}

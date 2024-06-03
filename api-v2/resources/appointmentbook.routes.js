@@ -17,9 +17,16 @@ rotas.get('/schedule',async (req,res)=>{
 
 })
 
-rotas.get('/contacts',async (req,res)=>{
-    const contacts = await controllers.getContacts()
+rotas.get('/contacts;:i',async (req,res)=>{
+    const contacts = await controllers.getContacts(req.params.i)
     res.json(contacts)
+})
+
+rotas.get('/getContactsCount',async (req,res)=>{
+    const contactsCount = await controllers.getContactsCount()
+    // console.log(contactsCount)
+    res.send(`${contactsCount}`)
+
 })
 
 //post
@@ -31,6 +38,11 @@ rotas.post('/goalsandtasks',async (req,res)=>{
 
 rotas.post('/contacts',async (req,res)=>{
     const contacts = await controllers.createContact(req.body)
+    res.json(contacts)
+})
+
+rotas.post('/contactsSearch',async (req,res)=>{
+    const contacts = await controllers.contactsSearch(req.body)
     res.json(contacts)
 })
 

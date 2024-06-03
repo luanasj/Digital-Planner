@@ -184,24 +184,6 @@ values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br
 insert into contacts (s_nome_contacts,s_vinculo_contacts,s_disciplina_contacts,s_email_contacts,s_telefone_contacts,s_site_contacts,s_instituicao_contacts)
 values ("Lorem Ipsum","adipisci velit","dolor sit amet","lorem123@outlook.com.br","999999999","www.randomurl.com/lorem/ipsum","uisquam est qui dolorem ipsum");
 
--- select CURDATE(); /*data atual*/
-
--- select weekday(curdate()); /*dia da semana da data atual*/
-
--- select SUBDATE(CURDATE(), interval weekday(curdate()) day); /*segunda da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 1 DAY); /*terça-feira da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 2 DAY); /*quarta-feira da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 3 DAY); /*quinta-feira da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 4 DAY); /*sexta-feira da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 5 DAY); /*sábado da semana*/
-
--- select DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY); /*domingo da semana*/
-
 /*insert goals*/
 
 insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
@@ -304,13 +286,6 @@ values (" auctor ligula",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(
 insert into goalsAndTasks (s_description_goalsAndTasks,i_type_goalsAndTasks,b_accomplished_goalsAndTasks,d_date_goalsAndTasks,i_dayweek_goalsAndTasks) 
 values ("nec scelerisque",2,false,(DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY)),6);
 
-/*select goals and tasks*/
-
--- select * from goalsAndTasks 
--- where 
---     i_type_goalsAndTasks = 1 or
---     d_date_goalsAndTasks between SUBDATE(CURDATE(), interval weekday(curdate()) day) and DATE_ADD((SUBDATE(CURDATE(), interval weekday(curdate()) day)),INTERVAL 6 DAY);
-
 /*select goals ans tasks as a stored procedure*/
 
 delimiter $$
@@ -345,15 +320,6 @@ values (descript,typenum,accomplished,dt,weekday(dt));
 
 end $$
 delimiter ;
-
-
-/*update goals and tasks*/
-
--- update goalsAndTasks set s_description_goalsAndTasks = /*<nova string>*/
--- where i_id_goalsAndTasks = /*id*/;
-
--- update goalsAndTasks set b_accomplished_goalsAndTasks = /*true or false*/
--- where i_id_goalsAndTasks = /*id*/;
 
 /*update goals and tasks as a procedure*/
 
@@ -392,9 +358,6 @@ delete from goalsAndTasks where i_id_goalsAndTasks = id;
 end $$
 delimiter ;
 
-/*select schedule*/
-
--- select * from schedule;
 
 /*update schedule as a procedure*/
 
@@ -411,11 +374,53 @@ where
 end $$
 delimiter ; 
 
-/*select contacts*/
+/*select contacts as a procedure*/
 
--- select * from contacts; 
+delimiter $$
 
-/*insert contacts*/
+create procedure contactsSelect(in inicio int)
+begin
+
+select  
+	i_id_contacts as id,
+	s_nome_contacts as Nome, 
+	s_vinculo_contacts as Vínculo, 
+	s_disciplina_contacts as Disciplina, 
+	s_email_contacts as Email, 
+	s_telefone_contacts as Telefone, 
+	s_site_contacts as Site, 
+	s_instituicao_contacts as Instituição
+from contacts order by s_nome_contacts
+limit inicio,20;
+
+end $$
+
+delimiter ;
+
+/*contacts search procedure*/
+
+delimiter $$
+create procedure contactsSearch(in col varchar(50), in search varchar(250))
+begin
+
+set @c = concat(search,"*");
+set @s = concat('select i_id_contacts as id,
+	s_nome_contacts as Nome, 
+	s_vinculo_contacts as Vínculo, 
+	s_disciplina_contacts as Disciplina, 
+	s_email_contacts as Email, 
+	s_telefone_contacts as Telefone, 
+	s_site_contacts as Site, 
+	s_instituicao_contacts as Instituição from contacts where ',col,' REGEXP ? order by s_nome_contacts');
+
+prepare smt from @s;
+execute smt using @c;
+deallocate prepare smt;
+
+end$$
+delimiter ;
+
+/*insert contacts as a procedure*/
 
 delimiter $$
 
@@ -428,7 +433,6 @@ values (nomectt,vinculo,disciplina,email,telefone,sitectt,instituicao);
 end $$
 
 delimiter ;
-
 
 /*update contacts as a procedure*/
 
