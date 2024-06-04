@@ -4,10 +4,7 @@ const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thursday','fr
 const currentDate = new Date()
 //negative numbers to go foward 
 // //and positive numbers to go back in days
-let pastOrFoward = 1
-const pastOrFowardRegularizer = (pastOrFoward == 0 ? ()=>{pastOrFoward=-1 ; return -1} : pastOrFoward)
-const mondayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * pastOrFowardRegularizer * 86400000) + 86400000 
-const sundayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * pastOrFowardRegularizer * 86400000) + (86400000 * 7) 
+let pastOrFowardCounter = 0
 const dayofweekstr = (dtMilisec)=>{
     const data = new Date(dtMilisec).toLocaleDateString().split("/")
     return `${data[2]}-${data[1]}-${data[0]}`
@@ -88,7 +85,9 @@ quoteData()
 
 
 
-const fetchGoalsAndTasksGet = async ()=> {
+const fetchGoalsAndTasksGet = async (pastOrFoward)=> {
+    const mondayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * 86400000) + 86400000 - (86400000 * 7 * pastOrFoward)
+    const sundayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * 86400000) + (86400000 * 7) - (86400000 * 7 * pastOrFoward)
 
     const mondayDateString = dayofweekstr(mondayOfTheWeekMilisec)
     const sundayDateString = dayofweekstr(sundayOfTheWeekMilisec)
@@ -150,6 +149,7 @@ const fetchGoalsAndTasksDelete = async (id)=>{
 //  console.log(fetchGoalsAndTasksGet())
     
 const filterGoalsAndTasks = async (obj,cat,date)=>{
+    
 const data = await obj
     if(cat==1){
         return data.filter(
@@ -169,22 +169,22 @@ const data = await obj
 } 
 
 
-const goals = async () => {return await filterGoalsAndTasks(fetchGoalsAndTasksGet(),1)}
-const tasks = (dt)=>{
-    return filterGoalsAndTasks(fetchGoalsAndTasksGet(),2,dt)}
+const goals = async () => {return await filterGoalsAndTasks(fetchGoalsAndTasksGet(pastOrFowardCounter),1)}
+const tasks = (dt,pastOrFoward)=>{
+    return filterGoalsAndTasks(fetchGoalsAndTasksGet(pastOrFoward),2,dt)}
     
-const goalsAndTasksRefresh = async (cat,dt,parsedDt,container)=>{
+const goalsAndTasksRefresh = async (cat,dt,parsedDt,container,pastOrFoward)=>{
     if(cat == 'goal'){
         const dgoals = await goals()
         goalsAndTasksFill(dgoals,'goal',10,container,dayofweekstr(Date.now()))
     } else if (cat == 'task'){
-        const dtasks = await tasks(dt)
-        goalsAndTasksFill(dtasks,cat,15,container,dt,new Date(parsedDt).getDay())
+        const dtasks = await tasks(dt,pastOrFoward)// É AQUI O ERRO PQ TA USANDO TASKS
+        goalsAndTasksFill(dtasks,cat,15,container,dt,new Date(parsedDt).getDay(),pastOrFoward)
     }
     
 }
     
-const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)=>{
+const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek,pastOrFoward)=>{
     catsContainer.innerHTML = ''
     const catsAmount = [...catsContainer.children].filter(el=>{
         return el.children[0] && el.children[0].classList.contains(`${catName}Checkbox`)
@@ -212,7 +212,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
                 
                 fetchGoalsAndTasksInsert(postvalue,postcat,postdt)
                 .then(res => {
-                    goalsAndTasksRefresh(postcat,postdt,parsedDate,refreshContainer)
+                    goalsAndTasksRefresh(postcat,postdt,parsedDate,refreshContainer,pastOrFoward)
                 }).catch(res=>console.log(res))
 
                 console.log("new task")
@@ -301,7 +301,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
                     }else {
                         fetchGoalsAndTasksDelete(dbid)
                         .then(res=>{
-                            goalsAndTasksRefresh(rfrcat,rfrdt,rfrparsedDt,rfrcontainer)
+                            goalsAndTasksRefresh(rfrcat,rfrdt,rfrparsedDt,rfrcontainer,pastOrFoward)
 
                         }).catch(res=>console.log(res))
 
@@ -330,12 +330,12 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek)
     
 const dailyTasksFill = async ()=> {
     const dgoals = await goals()
-    const dtasks = await tasks(dayofweekstr(Date.now()))
+    const dtasks = await tasks(dayofweekstr(Date.now(),pastOrFowardCounter))
     console.log(dgoals)
     console.log(dtasks)
     document.querySelector('#daily_toDo #dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
     goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`),dayofweekstr(Date.now()))
-    goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),dayofweekstr(Date.now()),currentDate.getDay())
+    goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),dayofweekstr(Date.now()),currentDate.getDay(),pastOrFowardCounter)
     
 }
 
@@ -343,10 +343,13 @@ if(document.querySelector('#daily_toDo')){
     dailyTasksFill()
 }
     
-const weekTasksFill = async ()=>{
+const weekTasksFill = async (pastOrFoward)=>{
+const mondayOfTheWeekMilisec = (Date.now() - (currentDate.getDay() == 0 ? 7 : currentDate.getDay()) * 86400000) + 86400000 - (86400000 * 7 * pastOrFoward)
+
+
 const weekToDoContainers = document.querySelectorAll('.tasksContainer')
 let dayofweek = mondayOfTheWeekMilisec
-const array = await fetchGoalsAndTasksGet()
+const array = await fetchGoalsAndTasksGet(pastOrFoward)
 const arrfilter = (array,dt)=>{
     return array.filter(
         (el)=>{
@@ -359,14 +362,32 @@ const arrfilter = (array,dt)=>{
         const day = dayofweek
         const res = arrfilter(array,dayofweekstr(day))
                           
-                goalsAndTasksFill(res,'task',15,container,dayofweekstr(day),new Date(day).getDay())
+                goalsAndTasksFill(res,'task',15,container,dayofweekstr(day),new Date(day).getDay(),pastOrFoward)
             
         dayofweek = dayofweek + 86400000 
     })
-}         
+}  
+
+const toDoBackAndFoward = async ()=>{
+    document.querySelector('#toDoBack').addEventListener('click',async (evt)=>{
+        pastOrFowardCounter++
+        await weekTasksFill(pastOrFowardCounter) 
+        console.log(pastOrFowardCounter)
+    })
+
+    document.querySelector('#toDoFoward').addEventListener('click',async (evt)=>{
+        pastOrFowardCounter--
+        await weekTasksFill(pastOrFowardCounter) 
+        console.log(pastOrFowardCounter)
+
+    })
+
+
+}
     
 if(document.querySelector('.weeklyToDoTop')){
-    weekTasksFill() 
+    weekTasksFill(pastOrFowardCounter) 
+    toDoBackAndFoward()
 }  
 
 
