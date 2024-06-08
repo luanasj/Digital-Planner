@@ -1,4 +1,5 @@
 const tabBtns = document.querySelectorAll(".tabBtn")
+const tabsmenu = document.querySelector('.tabsMenu')
 const daysOfTheWeek_Pt = ['Domingo','Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado']
 const daysOfTheWeek_En = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
 const currentDate = new Date()
@@ -11,13 +12,37 @@ const dayofweekstr = (dtMilisec)=>{
 }
 let contactsCounter = 0
 
+const rootPseudoClass = document.querySelector(':root')
+
+const menubtn = document.querySelector('.menu_btn')
+if(menubtn){
+    menubtn.addEventListener('click',(evt)=>{
+    
+        evt.target.classList.toggle('ph-moon')
+        evt.target.classList.toggle('ph-sun')
+    
+        if(evt.target.classList.contains('ph-sun')){
+            rootPseudoClass.style.setProperty('--main-light-color','#000')
+            rootPseudoClass.style.setProperty('--main-dark-color','#fff')
+        } else {
+            rootPseudoClass.style.setProperty('--main-light-color','#fff')
+            rootPseudoClass.style.setProperty('--main-dark-color','#000')
+        } 
+    
+    })
+}
+
+
+
+
+
 
 
 tabBtns.forEach((el)=>{
     el.addEventListener("click",(evt)=>{
         tabBtns.forEach((elm)=>{elm.classList.remove("tabselected")})
         evt.target.classList.add("tabselected")
-        window.open(`${evt.target.innerText.toLowerCase()}.html`, "tabIframe");
+        window.open(`./Tabs/${evt.target.innerText.toLowerCase()}.html`, "tabIframe");
     })
 })
 
@@ -307,11 +332,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek,
 
                     }
 
-                    // 
-                    // console.log(event.target.value)
-                    // const updtdsc = `${evt.target.checked}`
-                    // const updtid = evt.target.nextSibling.firstChild.getAttribute('dbid')
-                    
+                   
                 } else{
                     return
                 }
@@ -330,9 +351,7 @@ const goalsAndTasksFill = (catDataObj,catName,cellsQtd,catsContainer,dt,dayWeek,
     
 const dailyTasksFill = async ()=> {
     const dgoals = await goals()
-    const dtasks = await tasks(dayofweekstr(Date.now(),pastOrFowardCounter))
-    console.log(dgoals)
-    console.log(dtasks)
+    const dtasks = await tasks(dayofweekstr(Date.now()),pastOrFowardCounter)
     document.querySelector('#daily_toDo #dayTitle').innerText = daysOfTheWeek_Pt[currentDate.getDay()]
     goalsAndTasksFill(dgoals,'goal',10,document.querySelector(`#goalsContainer`),dayofweekstr(Date.now()))
     goalsAndTasksFill(dtasks,'task',15,document.querySelector(`#daily_toDo #tasksContainer`),dayofweekstr(Date.now()),currentDate.getDay(),pastOrFowardCounter)
@@ -396,7 +415,6 @@ const endpoint = "http://127.0.0.1:3000/schedule"
 return fetch(endpoint,{method:"GET"})
     .then(res=>res.json())
     .then(dados=>{
-        console.log(dados)  
         return dados 
     })
 }
@@ -414,7 +432,7 @@ const scheduleFetchUpdate = async (activity,day,period)=>{
     
     return await fetch(endpoint,{method:"PATCH", headers: myHeaders, body: JSON.stringify(body)})
     .then(res=>res.json())
-    .then(dados=>{console.log(dados);return dados})
+    .then(dados=>{return dados})
 }
 
 
@@ -444,7 +462,6 @@ const scheduleFill = (schElements,obj,day,num)=>{
                     })
                 
             } 
-            console.log('schweekfill acionada')
             schElements[i].children[num].children[0].setAttribute('period',`${obj[i].i_period_schedule}`)
             schElements[i].children[num].children[0].setAttribute('day',`${obj[i].i_dayweek_schedule}`)
             schElements[i].children[num].children[0].addEventListener("keydown", (event) => {
@@ -454,17 +471,14 @@ const scheduleFill = (schElements,obj,day,num)=>{
                     const day = event.target.getAttribute('day')
                     const activity = event.target.value
                     if (document.querySelectorAll(".daily_schedule .scheduleRow").length > 0) {    
-                            // const schftch = await 
-                            // console.log(schftch)
-                            // 
+                            
                             scheduleFetchUpdate(activity,day,period)
                             .then((res)=>{
                                 scheduleDayFill()
                             })
                         
                     } else if(document.querySelectorAll('.week_schedule tbody').length > 0) {
-                            // const schftch = await scheduleFetchUpdate(activity,day,period)
-                            // console.log(schftch)
+                        
                             scheduleFetchUpdate(activity,day,period)
                             .then((res)=>{
 
@@ -491,7 +505,6 @@ const scheduleDayFill = async ()=>{
 const scheduleWeekFill = async ()=>{
     
     const weekSchedule = document.querySelectorAll('.week_schedule tbody .scheduleRow')
-    // console.log(weekSchedule)
     const scheduleDays = [1,2,3,4,5,6,0]
     const scharray = await scheduleFetchGet()
     
@@ -713,11 +726,6 @@ const showContactsEditor = (data)=>{
 
 const hideContactsEditor = ()=>{
     const editPanel = document.querySelector('#editContact')
-    // const editForm = editPanel.querySelector('#editContent')
-    // const editBtns = editForm.querySelector('.editBtns')
-    // const editBtnsClone = editBtns.cloneNode(true)
-    // editBtns.remove()
-    // editForm.appendChild(editBtnsClone)
     editPanel.style.display = 'none'
 
 
@@ -727,9 +735,7 @@ const contactsCardsClear = ()=>{
     const contactsCardsSection = document.querySelector('#contactsCards')
     contactsCardsSection.innerHTML = ''
 }
-// const testMethod = ()=>{ //ONLY A TEST
-//     console.log('test successful')
-// }
+
      
 
 const contactsEditorAddFunctions = (okBtnMethod,id)=>{
@@ -767,13 +773,11 @@ const contactsHeaderAddFunctions = ()=>{
             console.log(el.getAttribute('dbid'))
             el.parentNode.parentNode.remove()
         })
-        // console.log(checkedcheckboxes)
 
     })
     document.querySelector('#selectAll_btn').addEventListener('input',(evt)=>{
         if(evt.target.checked == true){
             const uncheckedCheckboxes = document.querySelectorAll('.contactCheckbox:not(.contactCheckbox:checked)')
-            // console.log(uncheckedCheckboxes)
             uncheckedCheckboxes.forEach((box)=>{
                 box.checked = true
             })
