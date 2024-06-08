@@ -22,8 +22,8 @@ O propósito é proporcionar um recurso que pode ser acessado de qualquer lugar 
 
 ### Uso do Projeto:
 
-1.	Inserção: Escreva uma nova tarefa no campo “Nova tarefa” e pressione “Enter”/ Clique na atividade em branco, escreva uma nova atividade e pressione “Enter”.
-2.	Edição: Clique duas vezes numa tarefa ou atividade, edite o texto e pressione “Enter”
+1.	Inserção: Escreva uma nova tarefa no campo “Novo...” e pressione “Enter”/ Clique na atividade em branco, escreva uma nova atividade e pressione “Enter”.
+2.	Edição: Clique duas vezes em uma tarefa ou atividade, edite o texto e pressione “Enter”
 3.	Deletar: Clique duas vezes na tarefa / atividade, delete todo o texto e pressione “Enter”.
 4.	Para mudar de aba: clique no nome da aba para a qual pretende navegar. 
 5.	Avançar e Retornar semanas na aba To Do: clique nas setas (“<” e “>”) posicionadas nas laterais da aba.
